@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import React, { ReactNode } from 'react'
-import Navbar from './Navbar'
 
 type Props = {
   children?: ReactNode
@@ -17,9 +16,9 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <link rel="apple-touch-icon" href="/icon.png"></link>
       <meta name="theme-color" content="#fff" />
     </Head>
-    <header>
+    {/* <header>
       <Navbar />
-    </header>
+    </header> */}
     <div className="container mx-auto bg-white px-4 pt-4 dark:bg-slate-600">
       {children}
     </div>

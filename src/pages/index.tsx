@@ -1,9 +1,9 @@
-import Layout from '../components/Layout'
+import Layout from '../components/shared/Layout'
 
 const IndexPage = () => {
   return (
     <Layout title="Trippa Visor | Intro">
-      <button className="dark:bg-slate-900">Ciao</button>
+      <h1>Ciao</h1>
     </Layout>
   )
 }

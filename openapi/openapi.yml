@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  description: |
+    TrippaVisor Server that receive all the requests from the client
+  version: 0.0.1
+  title: TrippaVisor Server
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: Festival
+paths:
+  /festivals:
+    get:
+      tags:
+        - Festival
+      summary: Find festivals
+      operationId: getFestivals
+      parameters:
+        - name: q
+          in: query
+          description: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - active
+      responses:
+        200:
+          description: "Festivals"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  $ref: "#/components/schemas/FestivalSearchResult"
+        400:
+          description: Malformed query
+  /festivals/{id}:
+    get:
+      tags:
+        - Festival
+      summary: Get festival data
+      operationId: getFestival
+      parameters:
+        - name: id
+          in: path
+          description: ID of the festival to fetch
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Station data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Festival"
+        404:
+          description: station not found
+components:
+  schemas:
+    FestivalSearchResult:
+      type: object
+      required:
+        - name
+        - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Festival:
+      type: object
+      required:
+        - name
+        - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
