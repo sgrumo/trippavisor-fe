@@ -8,7 +8,7 @@ const Document = () => {
         href="https://fonts.googleapis.com/css2?family=Nunito"
         rel="stylesheet"
       />
-      <body className="bg-white dark:bg-slate-600">
+      <body className="font-sans bg-white dark:bg-slate-600">
         <Main />
         <NextScript />
       </body>

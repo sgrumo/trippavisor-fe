@@ -8,6 +8,10 @@ module.exports = {
     fontFamily: {
       'body': ['"Nunito"', 'sans-serif']
     },
+    colors: {
+      'yellow': '#f0b230',
+
+    }
   },
   plugins: [],
   darkMode: "class"

@@ -7,7 +7,7 @@ type Props = {
 }
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div>
+  <div className="h-screen">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -16,10 +16,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <link rel="apple-touch-icon" href="/icon.png"></link>
       <meta name="theme-color" content="#fff" />
     </Head>
-    {/* <header>
-      <Navbar />
-    </header> */}
-    <div className="container mx-auto bg-white px-4 pt-4 dark:bg-slate-600">
+    <div className="bg-white dark:bg-slate-600 container m-auto h-full px-4 pt-4">
       {children}
     </div>
   </div>

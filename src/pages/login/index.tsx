@@ -1,4 +1,4 @@
-import Layout from 'components/shared/Layout'
+import Layout from '../../components/shared/Layout'
 
 const Login = () => {
   return <Layout title="Trippa Visor | Login"></Layout>
