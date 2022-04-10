@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next",
-    "build": "next build",
+    "dev": "npm run openapi:gen && next",
+    "build": "npm run openapi:gen && next build",
     "start": "next start",
     "type-check": "tsc",
     "openapi:gen": "openapi -i openapi/openapi.yml -o src/generated/services/openapi"

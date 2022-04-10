@@ -76,6 +76,16 @@ components:
           type: string
         name:
           type: string
+        startPeriod:
+          type: string
+          format: datetime
+        endPeriod:
+          type: string
+          format: datetime
+        lat:
+          type: number
+        lng:
+          type: number
     Festival:
       type: object
       required:
@@ -86,3 +96,13 @@ components:
           type: string
         name:
           type: string
+        startPeriod:
+          type: string
+          format: datetime
+        endPeriod:
+          type: string
+          format: datetime
+        lat:
+          type: number
+        lng:
+          type: number

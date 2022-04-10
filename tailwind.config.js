@@ -10,9 +10,10 @@ module.exports = {
     },
     colors: {
       'yellow': '#f0b230',
-
+      'red': '#fcf0d9',
+      'green': '#9fc440'
     }
   },
   plugins: [],
-  darkMode: "class"
+  // darkMode: "class"
 }
