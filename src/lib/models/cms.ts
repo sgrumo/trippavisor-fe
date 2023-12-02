@@ -1,4 +1,4 @@
-import { IBaseFestival } from "./festival";
+import { IBaseFestival, IFestivalDetail } from "./festival";
 
 export const CMS_BASE_URL = "https://graphql.datocms.com/"
 
@@ -11,6 +11,6 @@ export interface IGetAllFestivals {
 }
 
 export type IGetSingleFestival = {
-
+    festival: IFestivalDetail;
 }
 

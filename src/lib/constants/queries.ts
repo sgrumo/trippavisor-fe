@@ -1,4 +1,4 @@
-export const GET_ALL_FESTIVALS = ` query {
+export const GET_ALL_FESTIVALS = `query {
     allFestivals {
         title
         id
@@ -22,4 +22,29 @@ export const GET_ALL_FESTIVALS = ` query {
         }
       }
 }`;
+
+
+export const GET_SINGLE_FESTIVAL = (title: string) => `query {
+    festival(filter:{ title: {eq: "${title}" }}) {
+      email
+      id
+      menus {
+        filename
+        url
+      }
+      location {
+        latitude
+        longitude
+      }
+      phonenumber
+      title
+      tags {
+        tag
+      }
+      thumbnail {
+        url
+      }
+      description
+    }
+  }`;
 
