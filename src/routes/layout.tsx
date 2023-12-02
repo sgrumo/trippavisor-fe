@@ -16,6 +16,9 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 export default component$(() => {
   return <>
     <Navbar />
-    <Slot />;
+    <main class="pt-20">
+      <Slot />
+    </main>
+    <footer></footer>
   </>
 });
