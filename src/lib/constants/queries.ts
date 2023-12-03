@@ -24,8 +24,8 @@ export const GET_ALL_FESTIVALS = `query {
 }`;
 
 
-export const GET_SINGLE_FESTIVAL = (title: string) => `query {
-    festival(filter:{ title: {eq: "${title}" }}) {
+export const GET_SINGLE_FESTIVAL = `query getSingleFestival($title: String!) {
+    festival(filter:{ title: {eq: $title }}) {
       email
       id
       menus {

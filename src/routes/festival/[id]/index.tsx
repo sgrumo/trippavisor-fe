@@ -7,17 +7,17 @@ import type { IGetSingleFestival } from "~/lib/models/cms";
 
 
 export const useGetFestivalDetail = routeLoader$(async (event: RequestEventLoader) => {
-    const res = await performRequest<IGetSingleFestival>({ query: GET_SINGLE_FESTIVAL(event.params.id) });
+    const res = await performRequest<IGetSingleFestival>({ query: GET_SINGLE_FESTIVAL, variables: { title: event.params.id } });
     return res.festival;
 });
 
 export default component$(() => {
-    const {value} = useGetFestivalDetail();
+    const { value } = useGetFestivalDetail();
 
     return (
         <>
-        {value.title}
-        {value.description}
+            {value.title}
+            {value.description}
         </>
     );
 });

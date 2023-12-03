@@ -5,8 +5,9 @@ import { type DocumentHead } from "@builder.io/qwik-city";
 
 export default component$(() => {
     return (
-          <ul>
-          </ul>
+          <div>
+            <h2>SEARCH</h2>
+          </div>
     );
 });
 
