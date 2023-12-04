@@ -26,7 +26,7 @@ export const searchFestival = async (options: FestivalQueryOptions) => {
     return acc;
   }, new Map());
 
-  const variables = { date: options.date, ...Object.fromEntries(tags) };
+  const variables = { ...options, ...Object.fromEntries(tags) };
 
   return performRequest<IGetAllFestivals>({
     query,
