@@ -1,10 +1,10 @@
 import { Resource, component$, useResource$, useStore } from "@builder.io/qwik";
 import { type DocumentHead } from "@builder.io/qwik-city";
-import { getAllFestivalByDate } from "~/lib/api/queries";
+import { searchFestival } from "~/lib/api/queries";
 import type { IGetAllFestivals } from "~/lib/models/cms";
 
 export default component$(() => {
-  const search = useStore({ query: "", date: "" });
+  const search = useStore({ query: "", date: "", tags: ["vegetariano"] });
 
   const festivals = useResource$<IGetAllFestivals>(({ track, cleanup }) => {
     track(() => [search.date, search.query]);
@@ -12,7 +12,7 @@ export default component$(() => {
     const controller = new AbortController();
     cleanup(() => controller.abort());
 
-    return getAllFestivalByDate(search.date);
+    return searchFestival(search);
   });
 
   return (

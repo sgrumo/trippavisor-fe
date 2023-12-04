@@ -1,4 +1,4 @@
-import { CMS_BASE_URL } from "./constants/cms";
+import { CMS_BASE_URL } from "./constants/api/cms";
 import { RequestModel } from "./models/api";
 import { DatoCMSResponseWrapper } from "./models/cms";
 

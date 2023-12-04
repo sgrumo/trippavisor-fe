@@ -115,12 +115,34 @@ export const GET_ALL_FESTIVALS_BY_GEOLOCALIZATION = `query getAllFestivalsByDate
     {
       localization: {
         near: {
-          latitude: 44.21,
-          longitude: 11.5,
-          radius: 3000
+          latitude: $latitude,
+          longitude: $longitude,
+          radius: $radius
         }
       }
     }) 
+  {
+    title
+    id
+    period {
+      startdate
+      enddate
+    }
+    tags {
+      tag
+    }
+    thumbnail {
+      alt
+      url
+    }
+  }
+}`;
+
+export const GET_ALL_FESTIVALS_FILTERED = (
+  filterString: string,
+  params: string,
+) => `query getAllFestivalsByDate(${params}){
+  allFestivals(${filterString}) 
   {
     title
     id
