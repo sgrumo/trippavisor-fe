@@ -65,7 +65,7 @@ export const GET_ALL_FESTIVALS_BY_QUERY = `query getAllFestivalsByQuery($query: 
   }
 }`;
 
-export const GET_ALL_FESTIVALS_BY_DATE = `query getAllFestivalsByDate($datestring: Date){
+export const GET_ALL_FESTIVALS_BY_DATE = `query getAllFestivalsByDate($date: Date){
   allFestivals(
     filter: {
       AND: [
@@ -74,7 +74,7 @@ export const GET_ALL_FESTIVALS_BY_DATE = `query getAllFestivalsByDate($datestrin
             any: {
               period: {
                 startdate: {
-                  lte: $datestring
+                  lte: $date
                 }
               }
             }
@@ -85,13 +85,41 @@ export const GET_ALL_FESTIVALS_BY_DATE = `query getAllFestivalsByDate($datestrin
             any: {
               period: {
                 enddate: {
-                  gte: $datestring
+                  gte: $date
                 }
               }
             }
           }
         }
       ],
+    }) 
+  {
+    title
+    id
+    period {
+      startdate
+      enddate
+    }
+    tags {
+      tag
+    }
+    thumbnail {
+      alt
+      url
+    }
+  }
+}`;
+
+export const GET_ALL_FESTIVALS_BY_GEOLOCALIZATION = `query getAllFestivalsByDate($latitude: FloatType!, $longitude: FloatType!, $radius: IntType!) {
+  allFestivals(filter: 
+    {
+      localization: {
+        near: {
+          latitude: 44.21,
+          longitude: 11.5,
+          radius: 3000
+        }
+      }
     }) 
   {
     title
@@ -118,7 +146,7 @@ export const GET_SINGLE_FESTIVAL = `query getSingleFestival($title: String!) {
         filename
         url
       }
-      location {
+      localization {
         latitude
         longitude
       }
