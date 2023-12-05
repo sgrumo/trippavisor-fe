@@ -4,7 +4,7 @@ export interface RequestModel {
   includeDrafts?: boolean;
 }
 
-export interface Localization {
+export interface LocalizationOptions {
   latitude: number;
   longitude: number;
   radius: number;
@@ -12,7 +12,7 @@ export interface Localization {
 
 export interface FestivalQueryOptions {
   date?: string;
-  localization?: Localization;
+  localization?: LocalizationOptions;
   query?: string;
   tags: string[];
 }

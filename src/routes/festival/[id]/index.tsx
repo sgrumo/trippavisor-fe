@@ -22,6 +22,15 @@ export default component$(() => {
     <>
       {value.title}
       {value.description}
+      <iframe
+        width="600"
+        height="450"
+        style="border:0"
+        loading="lazy"
+        allowFullScreen={true}
+        referrerPolicy="no-referrer-when-downgrade"
+        src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_MAPS_API_KEY}&q=${value.title}&center=${value.localization.latitude},${value.localization.longitude}`} />
+
     </>
   );
 });

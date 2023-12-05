@@ -1,7 +1,4 @@
 import { IBaseFestival, IFestivalDetail } from "./festival";
-
-export const CMS_BASE_URL = "https://graphql.datocms.com/";
-
 export interface DatoCMSError {
   message: string;
   path: string[];
