@@ -20,8 +20,8 @@ export default component$(() => {
 
   return (
     <>
-      {value.title}
-      {value.description}
+      <h2>{value.title}</h2>
+      <p>{value.description}</p>
       <iframe
         width="600"
         height="450"
@@ -30,7 +30,6 @@ export default component$(() => {
         allowFullScreen={true}
         referrerPolicy="no-referrer-when-downgrade"
         src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_MAPS_API_KEY}&q=${value.title}&center=${value.localization.latitude},${value.localization.longitude}`} />
-
     </>
   );
 });

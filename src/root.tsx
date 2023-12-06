@@ -10,12 +10,16 @@ import { RouterHead } from "./components/router-head/router-head";
 import "./global.css";
 
 export default component$(() => {
-
   return (
     <QwikCityProvider>
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
+        <script
+          src={`https://maps.googleapis.com/maps/api/js?key=${
+            import.meta.env.PUBLIC_MAPS_API_KEY
+          }&libraries=places`}
+        />
         <RouterHead />
       </head>
       <body lang="en">

@@ -22,7 +22,9 @@ export const getParams = ({
   }
 
   if (localization) {
-    params.push(`$localization: $localization`);
+    params.push(
+      `$latitude: FloatType!, $longitude: FloatType!, $radius: FloatType!`,
+    );
   }
 
   if (query) {
