@@ -33,6 +33,7 @@ export interface IMedia {
 export interface IBaseFestival {
   id: string;
   title: string;
+  slug: string;
   period: IPeriod[];
   tags: ITag[];
   thumbnail: IImage;

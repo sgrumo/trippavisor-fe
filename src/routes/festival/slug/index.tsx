@@ -9,7 +9,7 @@ export const useGetFestivalDetail = routeLoader$(
   async (event: RequestEventLoader) => {
     const res = await performRequest<IGetSingleFestival>({
       query: GET_SINGLE_FESTIVAL,
-      variables: { title: event.params.id },
+      variables: { slug: event.params.slug },
     });
     return res.festival;
   },
@@ -29,7 +29,12 @@ export default component$(() => {
         loading="lazy"
         allowFullScreen={true}
         referrerPolicy="no-referrer-when-downgrade"
-        src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_MAPS_API_KEY}&q=${value.title}&center=${value.localization.latitude},${value.localization.longitude}`} />
+        src={`https://www.google.com/maps/embed/v1/place?key=${
+          import.meta.env.PUBLIC_MAPS_API_KEY
+        }&q=${value.title}&center=${value.localization.latitude},${
+          value.localization.longitude
+        }`}
+      />
     </>
   );
 });

@@ -1,6 +1,7 @@
 export const GET_ALL_FESTIVALS = `query {
     allFestivals {
         title
+        slug
         id
         period {
           startdate
@@ -45,8 +46,8 @@ export const GET_ALL_FESTIVALS_FILTERED = (
   }
 }`;
 
-export const GET_SINGLE_FESTIVAL = `query getSingleFestival($title: String!) {
-    festival(filter:{ title: {eq: $title }}) {
+export const GET_SINGLE_FESTIVAL = `query getSingleFestival($slug: String!) {
+    festival(filter:{ slug: {eq: $slug }}) {
       email
       id
       menus {
