@@ -14,5 +14,5 @@ export interface FestivalQueryOptions {
   date?: string;
   localization?: LocalizationOptions;
   query?: string;
-  tags: string[];
+  tags?: string[];
 }

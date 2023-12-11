@@ -6,7 +6,7 @@ import type { FestivalQueryOptions } from "~/lib/models/api";
 import type { IGetAllFestivals } from "~/lib/models/cms";
 
 export default component$(() => {
-  const search = useStore<FestivalQueryOptions>({ tags: ["vegetariano"] });
+  const search = useStore<FestivalQueryOptions>({});
 
   const festivals = useResource$<IGetAllFestivals>(({ track, cleanup }) => {
     track(() => [search.date, search.query, search.localization]);

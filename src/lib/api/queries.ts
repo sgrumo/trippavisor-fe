@@ -15,18 +15,36 @@ export const searchFestival = async (options: FestivalQueryOptions) => {
   const filterString = getFilterString(options);
   const params = getParams(options);
 
-  console.log(options);
+  const variables: {
+    tags?: Map<number, string>;
+    latitude?: number;
+    longitude?: number;
+    radius?: number;
+    date?: string;
+    query?: string;
+  } = {};
 
   const query = GET_ALL_FESTIVALS_FILTERED(filterString, params);
 
-  const tags = options.tags.reduce((acc, curr, index) => {
-    acc.set(`tag_${index}`, curr);
-    return acc;
-  }, new Map());
+  const tags: Map<number, string> | undefined = options.tags?.reduce(
+    (acc, curr, index) => {
+      acc.set(`tag_${index}`, curr);
+      return acc;
+    },
+    new Map(),
+  );
 
-  const variables = {
-    ...Object.fromEntries(tags),
-  };
+  if (options.date) {
+    variables.date = options.date;
+  }
+
+  if (options.query) {
+    variables.query = options.query;
+  }
+
+  if (tags) {
+    variables.tags = tags;
+  }
 
   if (options.localization) {
     variables.latitude = options.localization.latitude;

@@ -18,7 +18,7 @@ export default component$(() => {
     <ul>
       {value.map((festival) => (
         <li key={festival.id}>
-          <a href={`/festival/${festival.title}`}>{festival.title}</a>
+          <a href={`/festival/${festival.slug}`}>{festival.title}</a>
         </li>
       ))}
     </ul>
