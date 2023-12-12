@@ -6,6 +6,7 @@ export const performRequest = async <T>({
   query,
   variables = {},
   includeDrafts = false,
+  abortController,
 }: RequestModel): Promise<T> => {
   const response = await fetch(CMS_BASE_URL, {
     headers: {
@@ -14,6 +15,7 @@ export const performRequest = async <T>({
     },
     method: "POST",
     body: JSON.stringify({ query, variables }),
+    signal: abortController?.signal,
   });
 
   const { data, errors }: DatoCMSResponseWrapper<T> = await response.json();

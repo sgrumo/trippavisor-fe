@@ -32,6 +32,7 @@ export const GET_ALL_FESTIVALS_FILTERED = (
   {
     title
     id
+    slug
     period {
       startdate
       enddate

@@ -11,7 +11,9 @@ import { FestivalQueryOptions } from "../models/api";
 
 export const getParams = ({
   date,
-  localization,
+  radius,
+  latitude,
+  longitude,
   query,
   tags,
 }: FestivalQueryOptions): string => {
@@ -21,7 +23,7 @@ export const getParams = ({
     params.push(`$date: Date`);
   }
 
-  if (localization) {
+  if (latitude && longitude && radius) {
     params.push(
       `$latitude: FloatType!, $longitude: FloatType!, $radius: FloatType!`,
     );
@@ -31,9 +33,11 @@ export const getParams = ({
     params.push(`$query: String!`);
   }
 
-  Array.from({ length: tags.length }).forEach((_, index) => {
-    params.push(`$tag_${index}: String!`);
-  });
+  if (tags) {
+    Array.from({ length: tags.length }).forEach((_, index) => {
+      params.push(`$tag_${index}: String!`);
+    });
+  }
 
   const paramString = params.length > 0 ? `${params.join(", ")}` : "";
 
@@ -42,7 +46,9 @@ export const getParams = ({
 
 export const getFilterString = ({
   date,
-  localization,
+  radius,
+  latitude,
+  longitude,
   query,
   tags,
 }: FestivalQueryOptions): string => {
@@ -59,7 +65,7 @@ export const getFilterString = ({
         `);
   }
 
-  if (localization) {
+  if (latitude && longitude && radius) {
     filters.push(`{ ${LOCALIZATION_FILTER} },`);
   }
 
@@ -67,9 +73,11 @@ export const getFilterString = ({
     filters.push(`{ ${TITLE_FILTER} },`);
   }
 
-  Array.from({ length: tags.length }).forEach((_, index) => {
-    filters.push(`{ ${TAGS_FILTER(index)} },`);
-  });
+  if (tags) {
+    Array.from({ length: tags.length }).forEach((_, index) => {
+      filters.push(`{ ${TAGS_FILTER(index)} },`);
+    });
+  }
 
   const filterString =
     filters.length > 0

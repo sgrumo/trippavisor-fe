@@ -2,6 +2,7 @@ import {
   GET_ALL_FESTIVALS,
   GET_ALL_FESTIVALS_FILTERED,
 } from "../constants/api/queries";
+import { METERS_PER_KILOMETER } from "../constants/generics";
 import { performRequest } from "../datocms";
 import { FestivalQueryOptions } from "../models/api";
 import { IGetAllFestivals } from "../models/cms";
@@ -11,7 +12,10 @@ export const getAllFestivals = async () => {
   return performRequest<IGetAllFestivals>({ query: GET_ALL_FESTIVALS });
 };
 
-export const searchFestival = async (options: FestivalQueryOptions) => {
+export const searchFestival = async (
+  options: FestivalQueryOptions,
+  abortController: AbortController,
+) => {
   const filterString = getFilterString(options);
   const params = getParams(options);
 
@@ -46,14 +50,15 @@ export const searchFestival = async (options: FestivalQueryOptions) => {
     variables.tags = tags;
   }
 
-  if (options.localization) {
-    variables.latitude = options.localization.latitude;
-    variables.longitude = options.localization.longitude;
-    variables.radius = options.localization.radius;
+  if (options.radius && options.latitude && options.longitude) {
+    variables.latitude = options.latitude;
+    variables.longitude = options.longitude;
+    variables.radius = options.radius * METERS_PER_KILOMETER;
   }
 
   return performRequest<IGetAllFestivals>({
     query,
     variables,
+    abortController,
   });
 };
