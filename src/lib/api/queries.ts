@@ -20,23 +20,22 @@ export const searchFestival = async (
   const params = getParams(options);
 
   const variables: {
-    tags?: Map<number, string>;
-    latitude?: number;
-    longitude?: number;
-    radius?: number;
-    date?: string;
-    query?: string;
+    [key: string]: string | number | undefined;
+    // latitude?: number;
+    // longitude?: number;
+    // radius?: number;
+    // date?: string;
+    // query?: string;
   } = {};
 
   const query = GET_ALL_FESTIVALS_FILTERED(filterString, params);
 
-  const tags: Map<number, string> | undefined = options.tags?.reduce(
-    (acc, curr, index) => {
-      acc.set(`tag_${index}`, curr);
-      return acc;
-    },
-    new Map(),
-  );
+  const tags: Map<number, string> | undefined = options.tags
+    ? [...options.tags].reduce((acc, curr, index) => {
+        acc.set(`tag_${index}`, curr);
+        return acc;
+      }, new Map())
+    : undefined;
 
   if (options.date) {
     variables.date = options.date;
@@ -47,7 +46,9 @@ export const searchFestival = async (
   }
 
   if (tags) {
-    variables.tags = tags;
+    tags.forEach((value, key) => {
+      variables[key] = value;
+    });
   }
 
   if (options.radius && options.latitude && options.longitude) {

@@ -12,6 +12,11 @@ export interface ITag {
   tag: string;
 }
 
+export interface MultiselectValue {
+  value: string;
+  label: string;
+}
+
 export interface IImage {
   responsiveImage: IResponsiveImage;
 }
