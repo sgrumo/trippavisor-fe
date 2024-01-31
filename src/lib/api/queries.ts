@@ -21,11 +21,6 @@ export const searchFestival = async (
 
   const variables: {
     [key: string]: string | number | undefined;
-    // latitude?: number;
-    // longitude?: number;
-    // radius?: number;
-    // date?: string;
-    // query?: string;
   } = {};
 
   const query = GET_ALL_FESTIVALS_FILTERED(filterString, params);

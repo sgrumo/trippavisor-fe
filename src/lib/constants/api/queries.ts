@@ -55,7 +55,7 @@ export const GET_SINGLE_FESTIVAL = `query getSingleFestival($slug: String!) {
         filename
         url
       }
-      localization {
+      geolocation {
         latitude
         longitude
       }

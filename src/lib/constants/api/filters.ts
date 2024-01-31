@@ -30,7 +30,7 @@ export const ENDDATE_FILTER = `period: {
       }
   }`;
 
-export const LOCALIZATION_FILTER = `localization: {
+export const LOCALIZATION_FILTER = `geolocation: {
     near: {
         latitude: $latitude,
         longitude: $longitude,

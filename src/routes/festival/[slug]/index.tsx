@@ -31,8 +31,8 @@ export default component$(() => {
         referrerPolicy="no-referrer-when-downgrade"
         src={`https://www.google.com/maps/embed/v1/place?key=${
           import.meta.env.PUBLIC_MAPS_API_KEY
-        }&q=${value.title}&center=${value.localization.latitude},${
-          value.localization.longitude
+        }&q=${value.title}&center=${value.geolocation.latitude},${
+          value.geolocation.longitude
         }`}
       />
     </>

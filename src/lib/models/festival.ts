@@ -50,5 +50,5 @@ export type IFestivalDetail = IBaseFestival & {
   menus: IMedia[];
   email: string;
   phoneNumber: string;
-  localization: Localization;
+  geolocation: Localization;
 };
