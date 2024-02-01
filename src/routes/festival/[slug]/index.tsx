@@ -6,6 +6,7 @@ import type {
 import { routeLoader$ } from "@builder.io/qwik-city";
 
 import { type DocumentHead } from "@builder.io/qwik-city";
+import { Carousel } from "~/components/carousel/carousel";
 import { PdfViewer } from "~/components/pdf-viewer/pdf-viewer";
 import {
   GET_ALL_FESTIVAL_SLUGS,
@@ -34,6 +35,7 @@ export default component$(() => {
     <>
       <h2>{value.title}</h2>
       <p>{value.description}</p>
+      <Carousel gallery={value.gallery} />
       <iframe
         width="600"
         height="450"
@@ -41,7 +43,7 @@ export default component$(() => {
         loading="lazy"
         allowFullscreen={true}
         onLoad$={() => {
-          console.log("loaded");
+          console.log("loaded"); // TODO: loader
         }}
         referrerPolicy="no-referrer-when-downgrade"
         src={`https://www.google.com/maps/embed/v1/place?key=${

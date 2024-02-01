@@ -59,6 +59,16 @@ export const GET_SINGLE_FESTIVAL = `query getSingleFestival($slug: String!) {
         latitude
         longitude
       }
+      gallery {
+        responsiveImage {
+          src
+          srcSet
+          width
+          height
+          alt
+          sizes
+        }
+      }
       phonenumber
       title
       tags {

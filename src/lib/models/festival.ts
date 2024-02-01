@@ -30,6 +30,10 @@ export interface IResponsiveImage {
   width: number;
 }
 
+export interface IGalleryImage {
+  responsiveImage: IResponsiveImage;
+}
+
 export interface IMedia {
   url: string;
   filename: string;
@@ -46,7 +50,7 @@ export interface IBaseFestival {
 
 export type IFestivalDetail = IBaseFestival & {
   description: string;
-  gallery: IResponsiveImage[];
+  gallery: IGalleryImage[];
   menus: IMedia[];
   email: string;
   phoneNumber: string;
