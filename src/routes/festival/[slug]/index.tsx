@@ -6,7 +6,6 @@ import type {
 import { routeLoader$ } from "@builder.io/qwik-city";
 
 import { type DocumentHead } from "@builder.io/qwik-city";
-import { Carousel } from "~/components/carousel/carousel";
 import { PdfViewer } from "~/components/pdf-viewer/pdf-viewer";
 import {
   GET_ALL_FESTIVAL_SLUGS,
@@ -35,7 +34,7 @@ export default component$(() => {
     <>
       <h2>{value.title}</h2>
       <p>{value.description}</p>
-      <Carousel gallery={value.gallery} />
+      {/* <Carousel gallery={value.gallery} /> */}
       <iframe
         width="600"
         height="450"
@@ -71,12 +70,28 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
   };
 };
 
-export const head: DocumentHead = {
-  title: "Welcome to Qwik",
-  meta: [
-    {
-      name: "description",
-      content: "Qwik site description",
-    },
-  ],
+export const head: DocumentHead = ({ resolveValue }) => {
+  const festival = resolveValue(useGetFestivalDetail);
+
+  return {
+    title: festival.title,
+    meta: [
+      {
+        name: "description",
+        content: festival.description,
+      },
+      {
+        name: "slug",
+        content: festival.slug,
+      },
+      {
+        property: "og:title",
+        content: festival.title,
+      },
+      {
+        property: "og:description",
+        content: festival.description,
+      },
+    ],
+  };
 };
