@@ -22,3 +22,7 @@ export interface IGetAllFestivals {
 export type IGetSingleFestival = {
   festival: IFestivalDetail;
 };
+
+export type IGetAllFestivalSlugs = {
+  allFestivals: { slug: string }[];
+};

@@ -70,3 +70,9 @@ export const GET_SINGLE_FESTIVAL = `query getSingleFestival($slug: String!) {
       description
     }
 }`;
+
+export const GET_ALL_FESTIVAL_SLUGS = `query getAllFestivalSlugs {
+  allFestivals {
+    slug
+  }
+}`;

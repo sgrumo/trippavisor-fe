@@ -44,7 +44,9 @@ export default component$(() => {
           <input
             type="text"
             value={search.query}
-            onChange$={(event) => (search.query = event.target.value as string)}
+            onChange$={(e) =>
+              (search.query = (e.target as HTMLInputElement).value)
+            }
           />
         </label>
 
@@ -60,15 +62,17 @@ export default component$(() => {
             class="px-5"
             type="number"
             value={search.radius}
-            onChange$={(e) => (search.radius = parseInt(e.target.value))}
+            onChange$={(e) =>
+              (search.radius = parseInt((e.target as HTMLInputElement).value))
+            }
           />
         </label>
         <label>
           OHI LA DATA
           <input
             type="date"
-            onChange$={(event) => {
-              search.date = event.target.value;
+            onChange$={(e) => {
+              search.date = (e.target as HTMLInputElement).value;
             }}
           />
         </label>

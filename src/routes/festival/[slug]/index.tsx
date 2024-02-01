@@ -1,9 +1,20 @@
 import { component$ } from "@builder.io/qwik";
-import type { RequestEventLoader } from "@builder.io/qwik-city";
-import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
-import { GET_SINGLE_FESTIVAL } from "~/lib/constants/api/queries";
+import type {
+  RequestEventLoader,
+  StaticGenerateHandler,
+} from "@builder.io/qwik-city";
+import { routeLoader$ } from "@builder.io/qwik-city";
+
+import { type DocumentHead } from "@builder.io/qwik-city";
+import {
+  GET_ALL_FESTIVAL_SLUGS,
+  GET_SINGLE_FESTIVAL,
+} from "~/lib/constants/api/queries";
 import { performRequest } from "~/lib/datocms";
-import type { IGetSingleFestival } from "~/lib/models/cms";
+import type {
+  IGetAllFestivalSlugs,
+  IGetSingleFestival,
+} from "~/lib/models/cms";
 
 export const useGetFestivalDetail = routeLoader$(
   async (event: RequestEventLoader) => {
@@ -27,7 +38,7 @@ export default component$(() => {
         height="450"
         style="border:0"
         loading="lazy"
-        allowFullScreen={true}
+        allowFullscreen={true}
         referrerPolicy="no-referrer-when-downgrade"
         src={`https://www.google.com/maps/embed/v1/place?key=${
           import.meta.env.PUBLIC_MAPS_API_KEY
@@ -38,6 +49,18 @@ export default component$(() => {
     </>
   );
 });
+
+export const onStaticGenerate: StaticGenerateHandler = async () => {
+  const { allFestivals } = await performRequest<IGetAllFestivalSlugs>({
+    query: GET_ALL_FESTIVAL_SLUGS,
+  });
+
+  return {
+    params: allFestivals.map(({ slug }) => {
+      return { slug };
+    }),
+  };
+};
 
 export const head: DocumentHead = {
   title: "Welcome to Qwik",
