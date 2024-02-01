@@ -6,6 +6,7 @@ import type {
 import { routeLoader$ } from "@builder.io/qwik-city";
 
 import { type DocumentHead } from "@builder.io/qwik-city";
+import { PdfViewer } from "~/components/pdf-viewer/pdf-viewer";
 import {
   GET_ALL_FESTIVAL_SLUGS,
   GET_SINGLE_FESTIVAL,
@@ -39,6 +40,9 @@ export default component$(() => {
         style="border:0"
         loading="lazy"
         allowFullscreen={true}
+        onLoad$={() => {
+          console.log("loaded");
+        }}
         referrerPolicy="no-referrer-when-downgrade"
         src={`https://www.google.com/maps/embed/v1/place?key=${
           import.meta.env.PUBLIC_MAPS_API_KEY
@@ -46,6 +50,9 @@ export default component$(() => {
           value.geolocation.longitude
         }`}
       />
+      {value.menus.map((menu) => (
+        <PdfViewer key={menu.filename} pdfUrl={menu.url} />
+      ))}
     </>
   );
 });
