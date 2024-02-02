@@ -21,6 +21,8 @@ const SHARED_MAP_KEY = "single_festival";
 export const onGet: RequestHandler = async ({ params, sharedMap }) => {
   const { slug } = params;
 
+  console.log("Chiamata a ", slug);
+
   const res = await performRequest<IGetSingleFestival>({
     query: GET_SINGLE_FESTIVAL,
     variables: { slug },
@@ -30,6 +32,7 @@ export const onGet: RequestHandler = async ({ params, sharedMap }) => {
 };
 
 export const useGetFestivalDetail = routeLoader$(({ sharedMap }) => {
+  console.log("get festival");
   return sharedMap.get(SHARED_MAP_KEY) as IFestivalDetail;
 });
 
