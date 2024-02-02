@@ -49,8 +49,10 @@ export const GET_ALL_FESTIVALS_FILTERED = (
 
 export const GET_SINGLE_FESTIVAL = `query getSingleFestival($slug: String!) {
     festival(filter:{ slug: {eq: $slug }}) {
-      email
       id
+      title
+      description
+      email
       menus {
         filename
         url
@@ -70,14 +72,17 @@ export const GET_SINGLE_FESTIVAL = `query getSingleFestival($slug: String!) {
         }
       }
       phonenumber
-      title
       tags {
         tag
       }
       thumbnail {
         url
       }
-      description
+      seo:_seoMetaTags{
+        attributes
+         content
+        tag
+      }
     }
 }`;
 

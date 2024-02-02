@@ -1,11 +1,9 @@
 import { component$ } from "@builder.io/qwik";
 import type {
-  RequestEventLoader,
+  DocumentHead,
   StaticGenerateHandler,
 } from "@builder.io/qwik-city";
-import { routeLoader$ } from "@builder.io/qwik-city";
-
-import { type DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type RequestHandler } from "@builder.io/qwik-city";
 import { PdfViewer } from "~/components/pdf-viewer/pdf-viewer";
 import {
   GET_ALL_FESTIVAL_SLUGS,
@@ -16,16 +14,24 @@ import type {
   IGetAllFestivalSlugs,
   IGetSingleFestival,
 } from "~/lib/models/cms";
+import type { IFestivalDetail } from "~/lib/models/festival";
 
-export const useGetFestivalDetail = routeLoader$(
-  async (event: RequestEventLoader) => {
-    const res = await performRequest<IGetSingleFestival>({
-      query: GET_SINGLE_FESTIVAL,
-      variables: { slug: event.params.slug },
-    });
-    return res.festival;
-  },
-);
+const SHARED_MAP_KEY = "single_festival";
+
+export const onGet: RequestHandler = async ({ params, sharedMap }) => {
+  const { slug } = params;
+
+  const res = await performRequest<IGetSingleFestival>({
+    query: GET_SINGLE_FESTIVAL,
+    variables: { slug },
+  });
+
+  sharedMap.set(SHARED_MAP_KEY, res.festival);
+};
+
+export const useGetFestivalDetail = routeLoader$(({ sharedMap }) => {
+  return sharedMap.get(SHARED_MAP_KEY) as IFestivalDetail;
+});
 
 export default component$(() => {
   const { value } = useGetFestivalDetail();
@@ -72,26 +78,12 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
 
 export const head: DocumentHead = ({ resolveValue }) => {
   const festival = resolveValue(useGetFestivalDetail);
+  const meta = festival.seo
+    .filter((tag) => tag.attributes !== null)
+    .map(({ attributes }) => ({
+      property: attributes?.property,
+      content: attributes?.content,
+    }));
 
-  return {
-    title: festival.title,
-    meta: [
-      {
-        name: "description",
-        content: festival.description,
-      },
-      {
-        name: "slug",
-        content: festival.slug,
-      },
-      {
-        property: "og:title",
-        content: festival.title,
-      },
-      {
-        property: "og:description",
-        content: festival.description,
-      },
-    ],
-  };
+  return { title: festival.title, meta };
 };

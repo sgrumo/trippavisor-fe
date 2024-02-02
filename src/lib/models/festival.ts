@@ -48,6 +48,17 @@ export interface IBaseFestival {
   thumbnail: IImage;
 }
 
+export interface SEOAttribute {
+  property: string;
+  content: string;
+}
+
+export interface SEOTag {
+  attributes: SEOAttribute | null;
+  content: string | null;
+  tag: "meta";
+}
+
 export type IFestivalDetail = IBaseFestival & {
   description: string;
   gallery: IGalleryImage[];
@@ -55,4 +66,5 @@ export type IFestivalDetail = IBaseFestival & {
   email: string;
   phoneNumber: string;
   geolocation: Localization;
+  seo: SEOTag[];
 };
