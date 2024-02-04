@@ -3,6 +3,7 @@ export interface RequestModel {
   variables?: any;
   includeDrafts?: boolean;
   abortController?: AbortController;
+  bearer?: string;
 }
 
 export interface LocalizationOptions {

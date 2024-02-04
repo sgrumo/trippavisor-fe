@@ -7,10 +7,14 @@ export const performRequest = async <T>({
   variables = {},
   includeDrafts = false,
   abortController,
+  bearer,
 }: RequestModel): Promise<T> => {
+  const bearerToken =
+    bearer !== undefined ? bearer : import.meta.env.PUBLIC_DATOCMS_API_TOKEN;
+
   const response = await fetch(CMS_BASE_URL, {
     headers: {
-      Authorization: `Bearer ${import.meta.env.PUBLIC_DATOCMS_API_TOKEN}`,
+      Authorization: `Bearer ${bearerToken}`,
       ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
     },
     method: "POST",
