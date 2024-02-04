@@ -1,6 +1,10 @@
 import { Resource, component$, useResource$ } from "@builder.io/qwik";
-import type { StaticGenerateHandler } from "@builder.io/qwik-city";
-import { useLocation } from "@builder.io/qwik-city";
+import type {
+  DocumentHead,
+  RequestEventLoader,
+  StaticGenerateHandler,
+} from "@builder.io/qwik-city";
+import { routeLoader$, useLocation } from "@builder.io/qwik-city";
 import { PdfViewer } from "~/components/pdf-viewer/pdf-viewer";
 import {
   GET_ALL_FESTIVAL_SLUGS,
@@ -11,6 +15,16 @@ import type {
   IGetAllFestivalSlugs,
   IGetSingleFestival,
 } from "~/lib/models/cms";
+
+export const useGetFestivalDetail = routeLoader$(
+  async (event: RequestEventLoader) => {
+    const res = await performRequest<IGetSingleFestival>({
+      query: GET_SINGLE_FESTIVAL,
+      variables: { slug: event.params.slug },
+    });
+    return res.festival;
+  },
+);
 
 export default component$(() => {
   const { params } = useLocation();
@@ -79,14 +93,14 @@ export const onStaticGenerate: StaticGenerateHandler = async ({ env }) => {
   };
 };
 
-// export const head: DocumentHead = ({ resolveValue }) => {
-//   const festival = resolveValue(useGetFestivalDetail);
-//   const meta = festival.seo
-//     .filter((tag) => tag.attributes !== null)
-//     .map(({ attributes }) => ({
-//       property: attributes?.property,
-//       content: attributes?.content,
-//     }));
+export const head: DocumentHead = ({ resolveValue }) => {
+  const festival = resolveValue(useGetFestivalDetail);
+  const meta = festival.seo
+    .filter((tag) => tag.attributes !== null)
+    .map(({ attributes }) => ({
+      property: attributes?.property,
+      content: attributes?.content,
+    }));
 
-//   return { title: festival.title, meta };
-// };
+  return { title: festival.title, meta };
+};
