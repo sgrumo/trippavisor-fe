@@ -14,11 +14,13 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 };
 
 export default component$(() => {
-  return <>
-    <Navbar />
-    <main class="pt-20">
-      <Slot />
-    </main>
-    <footer></footer>
-  </>
+  return (
+    <>
+      <Navbar />
+      <main class="pt-20">
+        <Slot />
+      </main>
+      <footer></footer>
+    </>
+  );
 });

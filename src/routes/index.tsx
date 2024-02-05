@@ -1,25 +1,16 @@
 import { component$ } from "@builder.io/qwik";
 import { type DocumentHead } from "@builder.io/qwik-city";
-
-// export const useGetAllFestivals = routeLoader$(async () => {
-//   const res = await performRequest<IGetAllFestivals>({
-//     query: GET_ALL_FESTIVALS,
-//   });
-//   return res.allFestivals;
-// });
+import About from "~/components/homepage/about/about";
+import AboveTheFold from "~/components/homepage/above-the-fold/above-the-fold";
+import ContactUs from "~/components/homepage/contact-us/contact-us";
 
 export default component$(() => {
-  // const { value } = useGetAllFestivals();
-
   return (
-    <>Test</>
-    // <ul>
-    //   {value.map((festival) => (
-    //     <li key={festival.id}>
-    //       <a href={`/festival/${festival.slug}`}>{festival.title}</a>
-    //     </li>
-    //   ))}
-    // </ul>
+    <>
+      <AboveTheFold />
+      <About />
+      <ContactUs />
+    </>
   );
 });
 
@@ -36,6 +27,14 @@ export const head: DocumentHead = {
     },
     {
       property: "og:description",
+      content: "Il portale definitivo per le sagre",
+    },
+    {
+      property: "twitter:title",
+      content: "Trippavisor | Il portale definitivo per le sagre",
+    },
+    {
+      property: "twitter:description",
       content: "Il portale definitivo per le sagre",
     },
   ],
