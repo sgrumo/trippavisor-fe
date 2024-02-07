@@ -13,11 +13,11 @@ export const Multiselect = component$<MultiselectProps>(
     });
 
     return (
-      <div class="grid grid-cols-2 gap-x-2 gap-y-2">
+      <div class="">
         {options.map((option) => {
           const selected = state.selectedValues.includes(option.value);
           return (
-            <label class="text-center" key={option.value}>
+            <label class="mr-4 mt-2 text-center" key={option.value}>
               <input
                 type="checkbox"
                 class="hidden"

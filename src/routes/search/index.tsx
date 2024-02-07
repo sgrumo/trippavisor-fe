@@ -1,7 +1,8 @@
 import { Resource, component$, useResource$, useStore } from "@builder.io/qwik";
-import { type DocumentHead } from "@builder.io/qwik-city";
+import type { DocumentHead } from "@builder.io/qwik-city";
 import { Multiselect } from "~/components/input/multiselect/multiselect";
 import { SearchInput } from "~/components/input/search-input/search-input";
+import { SearchCard } from "~/components/search-card/search-card";
 import { searchFestival } from "~/lib/api/queries";
 import { TAGS_OPTIONS } from "~/lib/constants/api/cms";
 import { DEFAULT_RADIUS } from "~/lib/constants/generics";
@@ -42,7 +43,7 @@ export default component$(() => {
   return (
     <div class="p-4">
       <h2>Cerca le tue sagre preferite su Trippavisor&#33;</h2>
-      <form class="grid grid-cols-1 gap-y-4 pt-2">
+      <form class="grid grid-cols-1 gap-y-4 py-2">
         <input
           title="query"
           placeholder="Parola chiave"
@@ -122,21 +123,11 @@ export default component$(() => {
               (search.query === undefined && (
                 <span>La tua ricerca non ha prodotto risultati</span>
               ))}
-            {/* {data.allFestivals.length === 0 &&
-              search.date === undefined &&
-              search.longitude === undefined &&
-              search.latitude === undefined &&
-              search.query === undefined &&
-              search.tags === undefined && (
-                <span>Metti qualcosa per cercare la tua sagra preferita</span>
-              )} */}
-            <ul>
+            <div class="grid grid-cols-1 gap-y-4">
               {data.allFestivals.map((festival) => (
-                <li key={festival.id}>
-                  <a href={`/festival/${festival.slug}`}>{festival.title}</a>
-                </li>
+                <SearchCard festival={festival} key={festival.title} />
               ))}
-            </ul>
+            </div>
           </>
         )}
         onPending={() => <>Loading...</>}

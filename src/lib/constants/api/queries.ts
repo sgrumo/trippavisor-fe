@@ -41,8 +41,14 @@ export const GET_ALL_FESTIVALS_FILTERED = (
       tag
     }
     thumbnail {
-      alt
-      url
+      responsiveImage {
+        src
+        srcSet
+        width
+        height
+        alt
+        sizes
+      }
     }
   }
 }`;
