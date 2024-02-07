@@ -37,10 +37,12 @@ export default component$(() => {
   });
 
   return (
-    <div>
+    <>
+      <h1>Ricerca le tue sagre preferite&#33;</h1>
+      <h2>Puoi cercare per parola chiave oppure per località&#33;</h2>
       <form class="grid grid-cols-2">
         <label>
-          OHI LA QUERY STRING
+          Parola chiave&#58;
           <input
             type="text"
             value={search.query}
@@ -57,7 +59,7 @@ export default component$(() => {
           }}
         />
         <label>
-          RADIUS
+          Raggio &#40;in km&#41;&#58;
           <input
             class="px-5"
             type="number"
@@ -68,7 +70,7 @@ export default component$(() => {
           />
         </label>
         <label>
-          OHI LA DATA
+          Data&#58;
           <input
             type="date"
             onChange$={(e) => {
@@ -77,7 +79,7 @@ export default component$(() => {
           />
         </label>
         <label>
-          TAGS
+          Filtra anche per tags&#58;
           <Multiselect
             options={TAGS_OPTIONS}
             onChangeValues$={(values) => {
@@ -96,7 +98,7 @@ export default component$(() => {
           }}
           type="reset"
         >
-          Clear filters
+          Pulisci la ricerca
         </button>
       </form>
       <Resource
@@ -130,7 +132,7 @@ export default component$(() => {
         )}
         onPending={() => <>Loading...</>}
       />
-    </div>
+    </>
   );
 });
 
