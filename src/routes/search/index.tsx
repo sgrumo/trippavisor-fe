@@ -40,9 +40,9 @@ export default component$(() => {
   });
 
   return (
-    <>
+    <div class="p-4">
       <h2>Cerca le tue sagre preferite su Trippavisor&#33;</h2>
-      <form class="grid grid-cols-1">
+      <form class="grid grid-cols-1 gap-y-4 pt-2">
         <input
           title="query"
           placeholder="Parola chiave"
@@ -83,7 +83,12 @@ export default component$(() => {
             search.date = (e.target as HTMLInputElement).value;
           }}
         />
-        <button type="submit">Cerca</button>
+        <button
+          class="flex items-center justify-center rounded-2xl bg-black p-4 text-white"
+          type="submit"
+        >
+          Cerca
+        </button>
         <Multiselect
           options={TAGS_OPTIONS}
           onChangeValues$={(values) => {
@@ -92,6 +97,7 @@ export default component$(() => {
         />
 
         <button
+          class="text-left font-semibold text-green underline"
           onClick$={() => {
             search.latitude = undefined;
             search.longitude = undefined;
@@ -116,14 +122,14 @@ export default component$(() => {
               (search.query === undefined && (
                 <span>La tua ricerca non ha prodotto risultati</span>
               ))}
-            {data.allFestivals.length === 0 &&
+            {/* {data.allFestivals.length === 0 &&
               search.date === undefined &&
               search.longitude === undefined &&
               search.latitude === undefined &&
               search.query === undefined &&
               search.tags === undefined && (
                 <span>Metti qualcosa per cercare la tua sagra preferita</span>
-              )}
+              )} */}
             <ul>
               {data.allFestivals.map((festival) => (
                 <li key={festival.id}>
@@ -135,7 +141,7 @@ export default component$(() => {
         )}
         onPending={() => <>Loading...</>}
       />
-    </>
+    </div>
   );
 });
 

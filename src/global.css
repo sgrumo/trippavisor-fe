@@ -1,21 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
-  -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 
 body {
   padding: 0;
   line-height: inherit;
+  font-family: "Be Vietnam Pro", sans-serif;
 }
 
-input, select {
-  border: 1px solid #090B04;
+input,
+select {
+  border: 1px solid #090b04;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+label:has(> input[type="checkbox"]) {
   border-radius: 0.5rem;
+  border: 1px solid #1b4543;
+  background-color: white;
+  color: #1b4543;
+  padding: 0.15rem 0.25rem;
+  font-weight: 700;
+}
+
+label:has(> input[type="checkbox"]:checked) {
+  color: white;
+  background-color: #1b4543;
 }
