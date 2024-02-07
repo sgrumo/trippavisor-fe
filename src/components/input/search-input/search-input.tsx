@@ -46,10 +46,10 @@ export const SearchInput = component$<SearchInputProps>(
 
     return (
       <input
+        title="località"
         id="search-input"
         type="text"
-        class="h-12 w-full rounded-lg border border-gray-300 bg-white px-4 text-sm focus:border-gray-400 focus:outline-none"
-        placeholder="Cerca..."
+        placeholder="Località"
       />
     );
   },

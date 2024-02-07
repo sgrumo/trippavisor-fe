@@ -41,6 +41,7 @@ export const Multiselect = component$<MultiselectProps>(
                 })}
               />
               {option.label}
+              {state.selectedValues.includes(option.value) && "X"}
             </label>
           </div>
         ))}

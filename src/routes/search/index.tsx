@@ -8,6 +8,9 @@ import { DEFAULT_RADIUS } from "~/lib/constants/generics";
 import type { FestivalQueryOptions } from "~/lib/models/api";
 import type { IGetAllFestivals } from "~/lib/models/cms";
 
+const MIN_RADIUS = 5;
+const MAX_RADIUS = 100;
+
 export default component$(() => {
   const search = useStore<FestivalQueryOptions>({ radius: DEFAULT_RADIUS });
 
@@ -38,55 +41,55 @@ export default component$(() => {
 
   return (
     <>
-      <h1>Ricerca le tue sagre preferite&#33;</h1>
-      <h2>Puoi cercare per parola chiave oppure per località&#33;</h2>
-      <form class="grid grid-cols-2">
-        <label>
-          Parola chiave&#58;
-          <input
-            type="text"
-            value={search.query}
-            onChange$={(e) =>
-              (search.query = (e.target as HTMLInputElement).value)
-            }
-          />
-        </label>
-
+      <h2>Cerca le tue sagre preferite su Trippavisor&#33;</h2>
+      <form class="grid grid-cols-1">
+        <input
+          title="query"
+          placeholder="Parola chiave"
+          type="text"
+          value={search.query}
+          onChange$={(e) =>
+            (search.query = (e.target as HTMLInputElement).value)
+          }
+        />
         <SearchInput
           onChangeLocation$={({ latitude, longitude }) => {
             search.latitude = latitude;
             search.longitude = longitude;
           }}
         />
-        <label>
-          Raggio &#40;in km&#41;&#58;
-          <input
-            class="px-5"
-            type="number"
-            value={search.radius}
-            onChange$={(e) =>
-              (search.radius = parseInt((e.target as HTMLInputElement).value))
-            }
-          />
-        </label>
-        <label>
-          Data&#58;
-          <input
-            type="date"
-            onChange$={(e) => {
-              search.date = (e.target as HTMLInputElement).value;
-            }}
-          />
-        </label>
-        <label>
-          Filtra anche per tags&#58;
-          <Multiselect
-            options={TAGS_OPTIONS}
-            onChangeValues$={(values) => {
-              search.tags = values;
-            }}
-          />
-        </label>
+
+        {search.latitude !== undefined && search.longitude !== undefined && (
+          <label>
+            Raggio &#40;in km&#41;&#58;
+            <input
+              title="radius"
+              type="range"
+              min={MIN_RADIUS}
+              max={MAX_RADIUS}
+              value={search.radius}
+              onChange$={(e) =>
+                (search.radius = parseInt((e.target as HTMLInputElement).value))
+              }
+            />
+            {search.radius}
+          </label>
+        )}
+        <input
+          title="data"
+          placeholder="Data"
+          type="date"
+          onChange$={(e) => {
+            search.date = (e.target as HTMLInputElement).value;
+          }}
+        />
+        <button type="submit">Cerca</button>
+        <Multiselect
+          options={TAGS_OPTIONS}
+          onChangeValues$={(values) => {
+            search.tags = values;
+          }}
+        />
 
         <button
           onClick$={() => {
@@ -98,7 +101,7 @@ export default component$(() => {
           }}
           type="reset"
         >
-          Pulisci la ricerca
+          Reset ricerca
         </button>
       </form>
       <Resource
