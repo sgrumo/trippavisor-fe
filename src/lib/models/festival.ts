@@ -1,6 +1,19 @@
-export interface Localization {
-  latitude: number;
-  longitude: number;
+export interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
+export interface Address {
+  route: string;
+  locality: string;
+  administrative_area_level_3: string;
+  administrative_area_level_2: string;
+  administrative_area_level_1: string;
+  country: string;
+  postal_code: string;
+  name: string;
+  formatted_address: string;
+  coordinates: Coordinates;
 }
 
 export interface IPeriod {
@@ -45,6 +58,7 @@ export interface IBaseFestival {
   slug: string;
   period: IPeriod[];
   tags: ITag[];
+  address: Address;
   thumbnail: IImage;
 }
 
@@ -65,6 +79,5 @@ export type IFestivalDetail = IBaseFestival & {
   menus: IMedia[];
   email: string;
   phoneNumber: string;
-  geolocation: Localization;
   seo: SEOTag[];
 };

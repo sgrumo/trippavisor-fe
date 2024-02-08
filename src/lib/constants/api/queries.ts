@@ -3,6 +3,7 @@ export const GET_ALL_FESTIVALS = `query {
         title
         slug
         id
+        address
         period {
           startdate
           enddate
@@ -33,6 +34,7 @@ export const GET_ALL_FESTIVALS_FILTERED = (
     title
     id
     slug
+    address
     period {
       startdate
       enddate
@@ -59,6 +61,7 @@ export const GET_SINGLE_FESTIVAL = `query getSingleFestival($slug: String!) {
       title
       description
       email
+      address
       menus {
         filename
         url
