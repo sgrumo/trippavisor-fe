@@ -15,6 +15,7 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <script
           async
           src={`https://maps.googleapis.com/maps/api/js?key=${

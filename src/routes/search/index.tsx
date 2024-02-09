@@ -59,7 +59,6 @@ export default component$(() => {
             search.longitude = longitude;
           }}
         />
-
         {search.latitude !== undefined && search.longitude !== undefined && (
           <label>
             Raggio &#40;in km&#41;&#58;
@@ -96,7 +95,6 @@ export default component$(() => {
             search.tags = values;
           }}
         />
-
         <button
           class="text-left font-semibold text-green underline"
           onClick$={() => {
@@ -123,7 +121,7 @@ export default component$(() => {
               (search.query === undefined && (
                 <span>La tua ricerca non ha prodotto risultati</span>
               ))}
-            <div class="grid grid-cols-1 gap-y-4">
+            <div class="grid grid-cols-1 gap-y-4 lg:grid-cols-4 xl:grid-cols-5">
               {data.allFestivals.map((festival) => (
                 <SearchCard festival={festival} key={festival.title} />
               ))}

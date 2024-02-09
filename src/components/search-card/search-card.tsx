@@ -10,7 +10,7 @@ interface SearchCardProps {
 export const SearchCard = component$<SearchCardProps>(({ festival }) => {
   const responsiveImage = festival.thumbnail.responsiveImage;
   return (
-    <div class="grid grid-cols-[30%_70%] gap-x-4">
+    <div class="grid grid-cols-[30%_70%] gap-x-4 lg:grid-cols-1">
       <picture>
         <img
           class="rounded-3xl"
@@ -22,13 +22,14 @@ export const SearchCard = component$<SearchCardProps>(({ festival }) => {
         />
       </picture>
       <div class="flex flex-col gap-y-2">
-        <strong>{festival.title}</strong>
+        <h5>{festival.title}</h5>
         {festival.period.map(({ startdate, enddate }) => (
           <span key={startdate}>{formatDateRange(startdate, enddate)}</span>
         ))}
         <a
+          class="underline"
           target="blank"
-          href={`https://www.google.com/maps/place/${festival.address.coordinates.lat},${festival.address.coordinates.lng}`}
+          href={`http://maps.google.com/maps?q=${festival.address.coordinates.lat},${festival.address.coordinates.lng}`}
         >
           {formatAddress(festival.address)}
         </a>

@@ -63,9 +63,9 @@ export default component$(() => {
                 referrerPolicy="no-referrer-when-downgrade"
                 src={`https://www.google.com/maps/embed/v1/place?key=${
                   import.meta.env.PUBLIC_MAPS_API_KEY
-                }&q=${festival.title}&center=${festival.geolocation.latitude},${
-                  festival.geolocation.longitude
-                }`}
+                }&q=${festival.title}&center=${
+                  festival.address.coordinates.lat
+                },${festival.address.coordinates.lng}`}
               />
               {festival.menus.map((menu) => (
                 <PdfViewer key={menu.filename} pdfUrl={menu.url} />
