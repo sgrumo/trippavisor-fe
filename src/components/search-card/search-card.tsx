@@ -10,7 +10,10 @@ interface SearchCardProps {
 export const SearchCard = component$<SearchCardProps>(({ festival }) => {
   const responsiveImage = festival.thumbnail.responsiveImage;
   return (
-    <div class="grid grid-cols-[30%_70%] gap-x-4 lg:grid-cols-1">
+    <a
+      href={`/festival/${festival.slug}`}
+      class="grid grid-cols-[30%_70%] gap-x-4 lg:grid-cols-1"
+    >
       <picture>
         <img
           class="rounded-3xl"
@@ -41,6 +44,6 @@ export const SearchCard = component$<SearchCardProps>(({ festival }) => {
           ))}
         </div>
       </div>
-    </div>
+    </a>
   );
 });

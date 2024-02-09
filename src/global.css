@@ -43,3 +43,23 @@ label:has(> input[type="checkbox"]:checked), .tag {
   color: white;
   background-color: #1b4543;
 }
+
+
+@layer components {
+  .detail-card {
+    @apply flex flex-col gap-y-2 shadow-3xl rounded-3xl p-4;
+  }
+  .detail-card-header {
+    @apply font-bold text-green;
+  }
+  .detail-card-secondary-header {
+    @apply text-sm font-bold mt-2;
+  }
+
+  .icon {
+    @apply h-6 w-6;
+  }
+  .icon-paragraph {
+    @apply flex gap-x-2;
+  }
+}

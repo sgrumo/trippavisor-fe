@@ -78,6 +78,6 @@ export type IFestivalDetail = IBaseFestival & {
   gallery: IGalleryImage[];
   menus: IMedia[];
   email: string;
-  phoneNumber: string;
+  phoneNumber?: string;
   seo: SEOTag[];
 };

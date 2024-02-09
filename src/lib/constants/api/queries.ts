@@ -66,6 +66,10 @@ export const GET_SINGLE_FESTIVAL = `query getSingleFestival($slug: String!) {
         filename
         url
       }
+      period {
+        startdate
+        enddate
+      }
       geolocation {
         latitude
         longitude
