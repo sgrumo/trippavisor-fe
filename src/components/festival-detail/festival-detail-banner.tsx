@@ -12,7 +12,7 @@ interface FestivalDetailBannerProps {
 export const FestivalDetailBanner = component$<FestivalDetailBannerProps>(
   ({ festival }) => {
     return (
-      <section class="flex flex-col gap-y-2 bg-secondary-yellow p-4 lg:px-16">
+      <section class="flex flex-col gap-y-2 bg-yellow p-4 lg:px-16">
         <h1 class="text-xl font-bold">{festival.title}</h1>
         <p class="icon-paragraph">
           <ImgMap class="icon" />
