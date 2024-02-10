@@ -14,23 +14,25 @@ export const SearchCard = component$<SearchCardProps>(({ festival }) => {
       href={`/festival/${festival.slug}`}
       class="grid grid-cols-[30%_70%] gap-x-4 lg:grid-cols-1"
     >
-      <picture>
+      <picture class="w-full lg:h-[18rem]">
         <img
-          class="rounded-3xl"
+          class="h-full w-full rounded-3xl object-cover"
           src={responsiveImage.src}
           srcset={responsiveImage.srcSet}
           alt={responsiveImage.alt}
-          width={responsiveImage.width}
-          height={responsiveImage.height}
+          width={250}
+          height={250}
         />
       </picture>
-      <div class="flex flex-col gap-y-2">
-        <h5>{festival.title}</h5>
+      <div class="flex h-full flex-col lg:gap-y-4">
+        <h5 class="text-xl font-bold lg:mt-2">{festival.title}</h5>
         {festival.period.map(({ startdate, enddate }) => (
-          <span key={startdate}>{formatDateRange(startdate, enddate)}</span>
+          <span class="text-sm font-[500]" key={startdate}>
+            {formatDateRange(startdate, enddate)}
+          </span>
         ))}
         <a
-          class="underline"
+          class="text-xs font-[500] underline"
           target="blank"
           href={`http://maps.google.com/maps?q=${festival.address.coordinates.lat},${festival.address.coordinates.lng}`}
         >

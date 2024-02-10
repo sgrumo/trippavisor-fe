@@ -13,7 +13,7 @@ export const Multiselect = component$<MultiselectProps>(
     });
 
     return (
-      <div class="">
+      <div class="lg:col-span-2 lg:row-start-4">
         {options.map((option) => {
           const selected = state.selectedValues.includes(option.value);
           return (

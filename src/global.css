@@ -33,7 +33,9 @@ label:has(> input[type="checkbox"]), .tag {
   border: 1px solid #1b4543;
   background-color: white;
   color: #1b4543;
-  padding: 0.15rem 0.25rem;
+  padding: 0.15rem 0.35rem;
+  text-align: center;
+  font-size: 12px;
   font-weight: 700;
   white-space: normal;
   word-wrap: break-word;
@@ -45,7 +47,6 @@ label:has(> input[type="checkbox"]:checked), .tag {
 }
 
 a.underline {
-
   text-decoration-skip-ink: none;
 }
 
@@ -66,5 +67,8 @@ a.underline {
   }
   .icon-paragraph {
     @apply flex gap-x-2;
+  }
+  .tags-container {
+    @apply mt-auto mb-2 lg:mb-0;
   }
 }

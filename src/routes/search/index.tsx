@@ -33,9 +33,12 @@ export default component$(() => {
       search.longitude === undefined &&
       search.latitude === undefined &&
       search.query === undefined &&
+      search.radius === DEFAULT_RADIUS &&
       (search.tags === undefined || search.tags.length === 0)
-    )
+    ) {
+      console.log("entro qua");
       return Promise.resolve({ allFestivals: [] });
+    }
 
     return searchFestival(search, controller);
   });
@@ -43,13 +46,13 @@ export default component$(() => {
   return (
     <div class="p-4">
       <h2>Cerca le tue sagre preferite su Trippavisor&#33;</h2>
-      <form class="grid grid-cols-1 gap-y-4 py-2">
+      <form class="grid grid-cols-1 gap-y-4 py-2 lg:grid-cols-3 lg:gap-x-4">
         <input
           title="query"
           placeholder="Parola chiave"
           type="text"
           value={search.query}
-          onChange$={(e) =>
+          onInput$={(e) =>
             (search.query = (e.target as HTMLInputElement).value)
           }
         />
@@ -59,22 +62,23 @@ export default component$(() => {
             search.longitude = longitude;
           }}
         />
-        {search.latitude !== undefined && search.longitude !== undefined && (
-          <label>
-            Raggio &#40;in km&#41;&#58;
-            <input
-              title="radius"
-              type="range"
-              min={MIN_RADIUS}
-              max={MAX_RADIUS}
-              value={search.radius}
-              onChange$={(e) =>
-                (search.radius = parseInt((e.target as HTMLInputElement).value))
-              }
-            />
-            {search.radius}
-          </label>
-        )}
+
+        <label
+          class={`${search.latitude !== undefined && search.longitude !== undefined ? "visible" : "hidden lg:invisible lg:block"}`}
+        >
+          Raggio &#40;in km&#41;&#58;
+          <input
+            title="radius"
+            type="range"
+            min={MIN_RADIUS}
+            max={MAX_RADIUS}
+            value={search.radius}
+            onChange$={(e) =>
+              (search.radius = parseInt((e.target as HTMLInputElement).value))
+            }
+          />
+          {search.radius}
+        </label>
         <input
           title="data"
           placeholder="Data"
@@ -83,12 +87,12 @@ export default component$(() => {
             search.date = (e.target as HTMLInputElement).value;
           }}
         />
-        <button
-          class="flex items-center justify-center rounded-2xl bg-black p-4 text-white"
+        {/* <button
+          class="flex items-center justify-center rounded-2xl bg-black p-4 text-white lg:col-start-2 lg:row-start-2"
           type="submit"
         >
           Cerca
-        </button>
+        </button> */}
         <Multiselect
           options={TAGS_OPTIONS}
           onChangeValues$={(values) => {
@@ -96,13 +100,13 @@ export default component$(() => {
           }}
         />
         <button
-          class="text-left font-semibold text-green underline"
+          class="text-left font-semibold text-green underline lg:col-start-2 lg:row-start-2"
           onClick$={() => {
             search.latitude = undefined;
             search.longitude = undefined;
-            search.radius = DEFAULT_RADIUS;
             search.query = undefined;
             search.date = undefined;
+            search.radius = DEFAULT_RADIUS;
           }}
           type="reset"
         >
@@ -121,7 +125,7 @@ export default component$(() => {
               (search.query === undefined && (
                 <span>La tua ricerca non ha prodotto risultati</span>
               ))}
-            <div class="grid grid-cols-1 gap-y-4 lg:grid-cols-4 xl:grid-cols-5">
+            <div class="grid grid-cols-1 gap-y-4 lg:grid-cols-4 lg:gap-x-8 xl:grid-cols-5">
               {data.allFestivals.map((festival) => (
                 <SearchCard festival={festival} key={festival.title} />
               ))}
