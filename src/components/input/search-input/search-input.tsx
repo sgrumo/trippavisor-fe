@@ -2,11 +2,11 @@ declare let google: any;
 
 import type { PropFunction } from "@builder.io/qwik";
 import { component$, useVisibleTask$ } from "@builder.io/qwik";
-import type { Localization } from "~/lib/models/festival";
+import type { Coordinates } from "~/lib/models/festival";
 import type { GeometryLocation, Place } from "~/lib/models/places";
 
 export interface SearchInputProps {
-  onChangeLocation$: PropFunction<(location: Localization) => void>;
+  onChangeLocation$: PropFunction<(location: Coordinates) => void>;
 }
 
 export const SearchInput = component$<SearchInputProps>(
@@ -39,7 +39,7 @@ export const SearchInput = component$<SearchInputProps>(
         const place: Place = autocomplete.getPlace();
         const { lat, lng } =
           place.geometry.location.toJSON() as GeometryLocation;
-        const localization: Localization = { latitude: lat, longitude: lng };
+        const localization: Coordinates = { lat, lng };
         onChangeLocation$(localization);
       });
     });

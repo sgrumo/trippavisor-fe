@@ -57,9 +57,9 @@ export default component$(() => {
           }
         />
         <SearchInput
-          onChangeLocation$={({ latitude, longitude }) => {
-            search.latitude = latitude;
-            search.longitude = longitude;
+          onChangeLocation$={({ lat, lng }) => {
+            search.latitude = lat;
+            search.longitude = lng;
           }}
         />
 
