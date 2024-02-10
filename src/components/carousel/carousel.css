@@ -7,8 +7,6 @@
 .slide {
   min-width: 100%;
   transition: all 0.3s ease-in-out;
-  background-size: cover;
-  background-position: center;
 }
 
 
@@ -26,9 +24,9 @@
 }
 
 .prev {
-  left: 10%;
+  left: 30%;
 }
 
 .next {
-  right: 10%;
+  right: 30%;
 }

@@ -44,6 +44,11 @@ label:has(> input[type="checkbox"]:checked), .tag {
   background-color: #1b4543;
 }
 
+a.underline {
+
+  text-decoration-skip-ink: none;
+}
+
 
 @layer components {
   .detail-card {

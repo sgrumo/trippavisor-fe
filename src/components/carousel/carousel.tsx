@@ -11,7 +11,7 @@ export const Carousel = component$<CarouselProps>(({ gallery }) => {
 
   const state = useStore({
     currentSlide: 0,
-    slides: gallery.map((image) => image.responsiveImage.src),
+    slides: gallery.map((image) => image.responsiveImage),
   });
 
   const nextSlide = $(() => {
@@ -25,18 +25,21 @@ export const Carousel = component$<CarouselProps>(({ gallery }) => {
 
   return (
     <div class="relative mt-4 flex items-center justify-center">
-      <div class="carousel-container h-64 w-full">
+      <div class="carousel-container h-[35vh] w-full">
         {state.slides.map((slide, index) => (
-          <div
-            key={index}
-            class={`slide ${index === state.currentSlide ? "active" : ""}`}
+          <img
+            key={slide.alt}
+            src={slide.src}
+            height={320}
+            width={320}
+            title={slide.alt}
+            alt={slide.alt}
+            class={`slide object-contain ${index === state.currentSlide ? "active" : ""}`}
             style={{
-              backgroundImage: `url(${slide})`,
               transform: `translateX(-${state.currentSlide * 100}%)`,
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
+              borderRadius: "16",
             }}
-          ></div>
+          ></img>
         ))}
       </div>
       <button class="prev" onClick$={prevSlide}>

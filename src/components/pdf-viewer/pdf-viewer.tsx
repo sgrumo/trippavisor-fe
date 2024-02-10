@@ -5,8 +5,10 @@ interface PdfViewerProps {
 }
 export const PdfViewer = component$<PdfViewerProps>(({ pdfUrl }) => {
   return (
-    <object data={pdfUrl} type="application/pdf">
+    <object class="h-[50vh] w-full" data={pdfUrl} type="application/pdf">
       <iframe
+        width="100%"
+        height="100%"
         src={`https://docs.google.com/viewer?url=${pdfUrl}&embedded=true`}
       ></iframe>
     </object>
