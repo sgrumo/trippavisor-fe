@@ -3,7 +3,7 @@ import {
   GET_ALL_FESTIVALS_FILTERED,
 } from "../constants/api/queries";
 import { METERS_PER_KILOMETER } from "../constants/generics";
-import { performRequest } from "../datocms";
+import { performRequest, performSearch } from "../datocms";
 import { FestivalQueryOptions } from "../models/api";
 import { IGetAllFestivals } from "../models/cms";
 import { getFilterString, getParams } from "../utils/query-builder";
@@ -52,7 +52,7 @@ export const searchFestival = async (
     variables.radius = options.radius * METERS_PER_KILOMETER;
   }
 
-  return performRequest<IGetAllFestivals>({
+  return performSearch<IGetAllFestivals>({
     query,
     variables,
     abortController,

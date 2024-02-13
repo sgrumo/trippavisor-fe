@@ -36,7 +36,6 @@ export default component$(() => {
       search.radius === DEFAULT_RADIUS &&
       (search.tags === undefined || search.tags.length === 0)
     ) {
-      console.log("entro qua");
       return Promise.resolve({ allFestivals: [] });
     }
 

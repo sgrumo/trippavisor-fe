@@ -1,10 +1,10 @@
-import { Resource, component$, useResource$ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import type {
   DocumentHead,
   RequestEventLoader,
   StaticGenerateHandler,
 } from "@builder.io/qwik-city";
-import { routeLoader$, useLocation } from "@builder.io/qwik-city";
+import { routeLoader$ } from "@builder.io/qwik-city";
 import { Carousel } from "~/components/carousel/carousel";
 import { ContactCard } from "~/components/festival-detail/contact.card";
 import { DetailCard } from "~/components/festival-detail/detail-card";
@@ -24,62 +24,45 @@ import type {
 
 export const useGetFestivalDetail = routeLoader$(
   async (event: RequestEventLoader) => {
+    const bearer = event.env.get("DATOCMS_API_TOKEN");
+    console.log("bearer", bearer);
+
     const res = await performRequest<IGetSingleFestival>({
       query: GET_SINGLE_FESTIVAL,
       variables: { slug: event.params.slug },
+      bearer,
     });
     return res.festival;
   },
 );
 
 export default component$(() => {
-  const { params } = useLocation();
-
-  const festivalResource = useResource$(async ({ cleanup }) => {
-    const abortController = new AbortController();
-    cleanup(() => abortController.abort("cleanup"));
-
-    const res = await performRequest<IGetSingleFestival>({
-      query: GET_SINGLE_FESTIVAL,
-      variables: { slug: params.slug },
-    });
-
-    return res.festival;
-  });
+  const { value } = useGetFestivalDetail();
 
   return (
     <>
-      <Resource
-        value={festivalResource}
-        onResolved={(festival) => {
-          return (
-            <>
-              <FestivalDetailBanner festival={festival} />
-              <Carousel gallery={festival.gallery} />
-              <section class="mt-4 grid grid-cols-1 gap-y-4 px-4 lg:grid-cols-2 lg:gap-x-4 lg:px-16">
-                <DetailCard festival={festival} />
-                <MenuCard festival={festival} />
-                <ContactCard festival={festival} />
-                <MapCard festival={festival} />
-                <div class="detail-card col-span-2 hidden lg:flex">
-                  <h3 class="detail-card-header">Menù, programmi e altro!</h3>
-                  <div class="menu-container grid grid-cols-2 gap-x-4">
-                    {festival.menus.map((menu) => (
-                      <PdfViewer key={menu.filename} pdfUrl={menu.url} />
-                    ))}
-                  </div>
-                </div>
-              </section>
-            </>
-          );
-        }}
-      />
+      <FestivalDetailBanner festival={value} />
+      <Carousel gallery={value.gallery} />
+      <section class="mt-4 grid grid-cols-1 gap-y-4 px-4 lg:grid-cols-2 lg:gap-x-4 lg:px-16">
+        <DetailCard festival={value} />
+        <MenuCard festival={value} />
+        <ContactCard festival={value} />
+        <MapCard festival={value} />
+        <div class="detail-card col-span-2 hidden lg:flex">
+          <h3 class="detail-card-header">Menù, programmi e altro!</h3>
+          <div class="menu-container grid grid-cols-2 gap-x-4">
+            {value.menus.map((menu) => (
+              <PdfViewer key={menu.filename} pdfUrl={menu.url} />
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 });
 
 export const onStaticGenerate: StaticGenerateHandler = async ({ env }) => {
-  const bearer = env.get("PUBLIC_DATOCMS_API_TOKEN");
+  const bearer = env.get("DATOCMS_API_TOKEN");
 
   const { allFestivals } = await performRequest<IGetAllFestivalSlugs>({
     query: GET_ALL_FESTIVAL_SLUGS,
