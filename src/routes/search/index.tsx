@@ -138,11 +138,27 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+  title: "Trippavisor | Search",
   meta: [
     {
       name: "description",
-      content: "Qwik site description",
+      content: "Ricerca le tue sagre preferite",
+    },
+    {
+      property: "og:title",
+      content: "Trippavisor | Search",
+    },
+    {
+      property: "og:description",
+      content: "Il portale definitivo per le sagre",
+    },
+    {
+      property: "twitter:title",
+      content: "Trippavisor | Search",
+    },
+    {
+      property: "twitter:description",
+      content: "Ricerca le tue sagre preferite",
     },
   ],
 };
