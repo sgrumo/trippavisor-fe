@@ -131,7 +131,7 @@ export default component$(() => {
             </div>
           </>
         )}
-        onPending={() => <>Loading...</>}
+        onPending={() => <>TEST</>}
       />
     </div>
   );
