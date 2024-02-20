@@ -1,15 +1,17 @@
 import type { QRL } from "@builder.io/qwik";
-import { $, component$, useStore } from "@builder.io/qwik";
+import { $, component$, useSignal, useStore } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import type { InitialValues, SubmitHandler } from "@modular-forms/qwik";
 
 import { reset, useForm } from "@modular-forms/qwik";
 import { SearchInput } from "~/components/input/search-input/search-input";
+import { SearchCard } from "~/components/search-card/search-card";
 import { searchFestival } from "~/lib/api/queries";
 import { TAGS_OPTIONS } from "~/lib/constants/api/cms";
 import { DEFAULT_RADIUS } from "~/lib/constants/generics";
 import type { FestivalQueryOptions } from "~/lib/models/api";
-import type { Coordinates } from "~/lib/models/festival";
+import type { IBaseFestival } from "~/lib/models/festival";
+import { type Coordinates } from "~/lib/models/festival";
 import type { SearchForm } from "~/lib/models/forms";
 
 const INITIAL_VALUES = {
@@ -27,12 +29,15 @@ export const useFormLoader = routeLoader$<InitialValues<SearchForm>>(
 
 export default component$(() => {
   const coordinates = useStore<Coordinates>({});
+  const festivals = useSignal<IBaseFestival[]>([]);
+  const loading = useSignal(false);
 
   const [searchForm, { Form, Field }] = useForm<SearchForm>({
     loader: useFormLoader(),
   });
 
   const handleSubmit: QRL<SubmitHandler<SearchForm>> = $(async (values) => {
+    loading.value = true;
     const tags = values.tags.array;
     const options: FestivalQueryOptions = {
       ...values,
@@ -41,10 +46,9 @@ export default component$(() => {
     };
     const res = await searchFestival(options);
 
-    res.allFestivals;
+    festivals.value = res.allFestivals;
+    loading.value = false;
   });
-
-  console.log(searchForm);
 
   return (
     <div class="p-4">
@@ -54,7 +58,7 @@ export default component$(() => {
         class="grid grid-cols-1 gap-y-4 py-2 lg:grid-cols-3 lg:gap-x-4"
       >
         <Field name="query">
-          {(field, props) => (
+          {(_, props) => (
             <input {...props} placeholder="Parola chiave" type="text" />
           )}
         </Field>
@@ -66,7 +70,7 @@ export default component$(() => {
           }}
         />
         <Field name="latitude" type="number">
-          {(field, props) => (
+          {(_, props) => (
             <input {...props} type="hidden" value={coordinates.latitude} />
           )}
         </Field>
@@ -89,9 +93,7 @@ export default component$(() => {
           </Field>
         </label>
         <Field name="date" type="Date">
-          {(field, props) => (
-            <input {...props} placeholder="Data" type="date" />
-          )}
+          {(_, props) => <input {...props} placeholder="Data" type="date" />}
         </Field>
         <button
           class="flex items-center justify-center rounded-2xl bg-black p-4 text-white disabled:cursor-not-allowed disabled:bg-slate-500 lg:col-start-2 lg:row-start-2"
@@ -130,6 +132,13 @@ export default component$(() => {
           Reset ricerca
         </button>
       </Form>
+      {festivals.value.length > 0 && (
+        <div class="grid grid-cols-1 gap-y-4 lg:grid-cols-4 lg:gap-x-8 xl:grid-cols-5">
+          {festivals.value.map((festival) => (
+            <SearchCard key={festival.id} festival={festival} />
+          ))}
+        </div>
+      )}
     </div>
   );
 });
