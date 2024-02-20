@@ -14,8 +14,8 @@ export const getAllFestivals = async () => {
 
 export const searchFestival = async (
   options: FestivalQueryOptions,
-  abortController: AbortController,
-) => {
+  abortController?: AbortController,
+): Promise<IGetAllFestivals> => {
   const filterString = getFilterString(options);
   const params = getParams(options);
 

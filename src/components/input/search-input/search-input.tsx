@@ -39,7 +39,7 @@ export const SearchInput = component$<SearchInputProps>(
         const place: Place = autocomplete.getPlace();
         const { lat, lng } =
           place.geometry.location.toJSON() as GeometryLocation;
-        const localization: Coordinates = { lat, lng };
+        const localization: Coordinates = { latitude: lat, longitude: lng };
         onChangeLocation$(localization);
       });
     });

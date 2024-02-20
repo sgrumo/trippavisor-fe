@@ -46,6 +46,8 @@
   },
   "dependencies": {
     "classnames": "^2.5.1",
-    "lottie-web": "^5.12.2"
+    "lottie-web": "^5.12.2",
+    "@modular-forms/qwik": "^0.23.1",
+    "valibot": "^0.28.1"
   }
 }
