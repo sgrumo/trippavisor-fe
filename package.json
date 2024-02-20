@@ -45,6 +45,8 @@
     "vite-tsconfig-paths": "^4.2.1"
   },
   "dependencies": {
-    "classnames": "^2.5.1"
+    "@modular-forms/qwik": "^0.23.1",
+    "classnames": "^2.5.1",
+    "valibot": "^0.28.1"
   }
 }

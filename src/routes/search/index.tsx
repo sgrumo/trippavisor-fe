@@ -1,138 +1,135 @@
-import { Resource, component$, useResource$, useStore } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
-import { Multiselect } from "~/components/input/multiselect/multiselect";
+import type { QRL } from "@builder.io/qwik";
+import { $, component$, useStore } from "@builder.io/qwik";
+import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
+import type { InitialValues, SubmitHandler } from "@modular-forms/qwik";
+
+import { reset, useForm } from "@modular-forms/qwik";
 import { SearchInput } from "~/components/input/search-input/search-input";
-import { SearchCard } from "~/components/search-card/search-card";
 import { searchFestival } from "~/lib/api/queries";
 import { TAGS_OPTIONS } from "~/lib/constants/api/cms";
 import { DEFAULT_RADIUS } from "~/lib/constants/generics";
 import type { FestivalQueryOptions } from "~/lib/models/api";
-import type { IGetAllFestivals } from "~/lib/models/cms";
+import type { Coordinates } from "~/lib/models/festival";
+import type { SearchForm } from "~/lib/models/forms";
 
-const MIN_RADIUS = 5;
-const MAX_RADIUS = 100;
+const INITIAL_VALUES = {
+  latitude: undefined,
+  longitude: undefined,
+  query: undefined,
+  range: DEFAULT_RADIUS,
+  date: undefined,
+  tags: { boolean: false, array: [] },
+};
+
+export const useFormLoader = routeLoader$<InitialValues<SearchForm>>(
+  () => INITIAL_VALUES,
+);
 
 export default component$(() => {
-  const search = useStore<FestivalQueryOptions>({ radius: DEFAULT_RADIUS });
+  const coordinates = useStore<Coordinates>({});
 
-  const festivals = useResource$<IGetAllFestivals>(({ track, cleanup }) => {
-    track(() => [
-      search.date,
-      search.query,
-      search.longitude,
-      search.latitude,
-      search.radius,
-      search.tags,
-    ]);
-
-    const controller = new AbortController();
-    cleanup(() => controller.abort());
-
-    if (
-      search.date === undefined &&
-      search.longitude === undefined &&
-      search.latitude === undefined &&
-      search.query === undefined &&
-      search.radius === DEFAULT_RADIUS &&
-      (search.tags === undefined || search.tags.length === 0)
-    ) {
-      return Promise.resolve({ allFestivals: [] });
-    }
-
-    return searchFestival(search, controller);
+  const [searchForm, { Form, Field }] = useForm<SearchForm>({
+    loader: useFormLoader(),
   });
+
+  const handleSubmit: QRL<SubmitHandler<SearchForm>> = $(async (values) => {
+    const tags = values.tags.array;
+    const options: FestivalQueryOptions = {
+      ...values,
+      tags,
+      date: values.date ? values.date.toLocaleDateString() : undefined,
+    };
+    const res = await searchFestival(options);
+
+    res.allFestivals;
+  });
+
+  console.log(searchForm);
 
   return (
     <div class="p-4">
       <h2>Cerca le tue sagre preferite su Trippavisor&#33;</h2>
-      <form class="grid grid-cols-1 gap-y-4 py-2 lg:grid-cols-3 lg:gap-x-4">
-        <input
-          title="query"
-          placeholder="Parola chiave"
-          type="text"
-          value={search.query}
-          onInput$={(e) =>
-            (search.query = (e.target as HTMLInputElement).value)
-          }
-        />
+      <Form
+        onSubmit$={handleSubmit}
+        class="grid grid-cols-1 gap-y-4 py-2 lg:grid-cols-3 lg:gap-x-4"
+      >
+        <Field name="query">
+          {(field, props) => (
+            <input {...props} placeholder="Parola chiave" type="text" />
+          )}
+        </Field>
         <SearchInput
-          onChangeLocation$={({ lat, lng }) => {
-            search.latitude = lat;
-            search.longitude = lng;
+          onChangeLocation$={({ latitude, longitude }) => {
+            coordinates.latitude = latitude;
+            coordinates.longitude = longitude;
+            searchForm.dirty = true;
           }}
         />
-
+        <Field name="latitude" type="number">
+          {(field, props) => (
+            <input {...props} type="hidden" value={coordinates.latitude} />
+          )}
+        </Field>
+        <Field name="longitude" type="number">
+          {(_, props) => (
+            <input {...props} type="hidden" value={coordinates.longitude} />
+          )}
+        </Field>
         <label
-          class={`${search.latitude !== undefined && search.longitude !== undefined ? "visible" : "hidden lg:invisible lg:block"}`}
+          class={`${coordinates.latitude && coordinates.longitude ? "visible" : "hidden lg:invisible lg:block"}`}
         >
           Raggio &#40;in km&#41;&#58;
-          <input
-            title="radius"
-            type="range"
-            min={MIN_RADIUS}
-            max={MAX_RADIUS}
-            value={search.radius}
-            onChange$={(e) =>
-              (search.radius = parseInt((e.target as HTMLInputElement).value))
-            }
-          />
-          {search.radius}
+          <Field name="range" type="number">
+            {(field, props) => (
+              <>
+                <input {...props} type="range" />
+                {field.value}
+              </>
+            )}
+          </Field>
         </label>
-        <input
-          title="data"
-          placeholder="Data"
-          type="date"
-          onChange$={(e) => {
-            search.date = (e.target as HTMLInputElement).value;
-          }}
-        />
-        {/* <button
-          class="flex items-center justify-center rounded-2xl bg-black p-4 text-white lg:col-start-2 lg:row-start-2"
+        <Field name="date" type="Date">
+          {(field, props) => (
+            <input {...props} placeholder="Data" type="date" />
+          )}
+        </Field>
+        <button
+          class="flex items-center justify-center rounded-2xl bg-black p-4 text-white disabled:cursor-not-allowed disabled:bg-slate-500 lg:col-start-2 lg:row-start-2"
           type="submit"
+          disabled={!searchForm.dirty}
         >
           Cerca
-        </button> */}
-        <Multiselect
-          options={TAGS_OPTIONS}
-          onChangeValues$={(values) => {
-            search.tags = values;
-          }}
-        />
+        </button>
+        <div class="lg:col-span-2 lg:row-start-4">
+          {TAGS_OPTIONS.map(({ label, value }) => (
+            <Field key={value} name="tags.array" type="string[]">
+              {(field, props) => (
+                <label class="mr-4 mt-2 text-center">
+                  <input
+                    {...props}
+                    class="hidden"
+                    type="checkbox"
+                    value={value}
+                    checked={field.value?.includes(value)}
+                  />
+                  {label}
+                </label>
+              )}
+            </Field>
+          ))}
+        </div>
         <button
-          class="text-left font-semibold text-green underline lg:col-start-2 lg:row-start-2"
-          onClick$={() => {
-            search.latitude = undefined;
-            search.longitude = undefined;
-            search.query = undefined;
-            search.date = undefined;
-            search.radius = DEFAULT_RADIUS;
-          }}
+          class="text-left font-semibold text-green underline lg:col-start-2 lg:row-start-3"
           type="reset"
+          onClick$={() => {
+            reset(searchForm, {});
+            coordinates.latitude = undefined;
+            coordinates.longitude = undefined;
+          }}
         >
           Reset ricerca
         </button>
-      </form>
-      <Resource
-        value={festivals}
-        onRejected={(error) => <>{error}</>}
-        onResolved={(data) => (
-          <>
-            {(data.allFestivals.length === 0 && search.date !== undefined) ||
-              (search.longitude === undefined &&
-                search.latitude === undefined) ||
-              (search.tags !== undefined && search.tags.length > 0) ||
-              (search.query === undefined && (
-                <span>La tua ricerca non ha prodotto risultati</span>
-              ))}
-            <div class="grid grid-cols-1 gap-y-4 lg:grid-cols-4 lg:gap-x-8 xl:grid-cols-5">
-              {data.allFestivals.map((festival) => (
-                <SearchCard festival={festival} key={festival.title} />
-              ))}
-            </div>
-          </>
-        )}
-        onPending={() => <>Loading...</>}
-      />
+      </Form>
     </div>
   );
 });
