@@ -12,7 +12,7 @@ import {
 } from "valibot";
 import { MAX_RADIUS, MIN_RADIUS } from "../constants/generics";
 
-const SearchSchema = object({
+export const SearchSchema = object({
   query: optional(string([])),
   latitude: optional(number()),
   longitude: optional(number()),

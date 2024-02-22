@@ -1,5 +1,5 @@
 import type { QRL } from "@builder.io/qwik";
-import { $, component$, useSignal, useStore } from "@builder.io/qwik";
+import { $, component$, useStore } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import type { InitialValues, SubmitHandler } from "@modular-forms/qwik";
 
@@ -12,7 +12,7 @@ import { DEFAULT_RADIUS } from "~/lib/constants/generics";
 import type { FestivalQueryOptions } from "~/lib/models/api";
 import type { IBaseFestival } from "~/lib/models/festival";
 import { type Coordinates } from "~/lib/models/festival";
-import type { SearchForm } from "~/lib/models/forms";
+import { type SearchForm } from "~/lib/models/forms";
 
 const INITIAL_VALUES = {
   latitude: undefined,
@@ -26,18 +26,26 @@ const INITIAL_VALUES = {
 export const useFormLoader = routeLoader$<InitialValues<SearchForm>>(
   () => INITIAL_VALUES,
 );
+type SearchStore = {
+  coordinates: Coordinates;
+  festivals: IBaseFestival[];
+  loading: boolean;
+};
 
 export default component$(() => {
-  const coordinates = useStore<Coordinates>({});
-  const festivals = useSignal<IBaseFestival[]>([]);
-  const loading = useSignal(false);
+  const store = useStore<SearchStore>({
+    coordinates: {},
+    loading: false,
+    festivals: [],
+  });
 
   const [searchForm, { Form, Field }] = useForm<SearchForm>({
     loader: useFormLoader(),
   });
 
   const handleSubmit: QRL<SubmitHandler<SearchForm>> = $(async (values) => {
-    loading.value = true;
+    store.loading = true;
+
     const tags = values.tags.array;
     const options: FestivalQueryOptions = {
       ...values,
@@ -45,9 +53,8 @@ export default component$(() => {
       date: values.date ? values.date.toLocaleDateString() : undefined,
     };
     const res = await searchFestival(options);
-
-    festivals.value = res.allFestivals;
-    loading.value = false;
+    store.festivals = res.allFestivals;
+    store.loading = false;
   });
 
   return (
@@ -64,23 +71,31 @@ export default component$(() => {
         </Field>
         <SearchInput
           onChangeLocation$={({ latitude, longitude }) => {
-            coordinates.latitude = latitude;
-            coordinates.longitude = longitude;
+            store.coordinates.latitude = latitude;
+            store.coordinates.longitude = longitude;
             searchForm.dirty = true;
           }}
         />
         <Field name="latitude" type="number">
           {(_, props) => (
-            <input {...props} type="hidden" value={coordinates.latitude} />
+            <input
+              {...props}
+              type="hidden"
+              value={store.coordinates.latitude}
+            />
           )}
         </Field>
         <Field name="longitude" type="number">
           {(_, props) => (
-            <input {...props} type="hidden" value={coordinates.longitude} />
+            <input
+              {...props}
+              type="hidden"
+              value={store.coordinates.longitude}
+            />
           )}
         </Field>
         <label
-          class={`${coordinates.latitude && coordinates.longitude ? "visible" : "hidden lg:invisible lg:block"}`}
+          class={`${store.coordinates.latitude && store.coordinates.longitude ? "visible" : "hidden lg:invisible lg:block"}`}
         >
           Raggio &#40;in km&#41;&#58;
           <Field name="range" type="number">
@@ -125,16 +140,17 @@ export default component$(() => {
           type="reset"
           onClick$={() => {
             reset(searchForm, {});
-            coordinates.latitude = undefined;
-            coordinates.longitude = undefined;
+            store.coordinates.latitude = undefined;
+            store.coordinates.longitude = undefined;
           }}
         >
           Reset ricerca
         </button>
       </Form>
-      {festivals.value.length > 0 && (
+      {store.loading && <>Caricamento...</>}
+      {store.festivals.length > 0 && (
         <div class="grid grid-cols-1 gap-y-4 lg:grid-cols-4 lg:gap-x-8 xl:grid-cols-5">
-          {festivals.value.map((festival) => (
+          {store.festivals.map((festival) => (
             <SearchCard key={festival.id} festival={festival} />
           ))}
         </div>
