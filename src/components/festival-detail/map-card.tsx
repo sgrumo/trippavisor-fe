@@ -26,15 +26,15 @@ export const MapCard = component$<MapCardProps>(({ festival }) => {
         src={`https://www.google.com/maps/embed/v1/place?key=${
           import.meta.env.PUBLIC_MAPS_API_KEY
         }&q=${festival.title}&center=${
-          festival.address.coordinates.lat
-        },${festival.address.coordinates.lng}`}
+          festival.address.coordinates.latitude
+        },${festival.address.coordinates.longitude}`}
       />
       <p class="icon-paragraph">
         <ImgMap class="icon" />
         <a
           class="underline"
           target="blank"
-          href={`http://maps.google.com/maps?q=${festival.address.coordinates.lat},${festival.address.coordinates.lng}`}
+          href={`http://maps.google.com/maps?q=${festival.address.coordinates.latitude},${festival.address.coordinates.longitude}`}
         >
           {formatAddress(festival.address)}
         </a>

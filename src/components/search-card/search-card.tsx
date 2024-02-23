@@ -34,7 +34,7 @@ export const SearchCard = component$<SearchCardProps>(({ festival }) => {
         <a
           class="text-xs font-[500] underline"
           target="blank"
-          href={`http://maps.google.com/maps?q=${festival.address.coordinates.lat},${festival.address.coordinates.lng}`}
+          href={`http://maps.google.com/maps?q=${festival.address.coordinates.latitude},${festival.address.coordinates.longitude}`}
         >
           {formatAddress(festival.address)}
         </a>
