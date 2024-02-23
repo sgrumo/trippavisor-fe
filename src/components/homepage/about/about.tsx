@@ -17,6 +17,7 @@ export default component$(() => {
       <a
         class="mt-4 rounded-2xl bg-red p-4 text-center font-bold uppercase text-white"
         title="ricerca"
+        data-umami-event="About search button click"
         href="/search"
       >
         Vai alla ricerca!

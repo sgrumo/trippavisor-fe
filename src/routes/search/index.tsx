@@ -113,6 +113,14 @@ export default component$(() => {
         <button
           class="flex items-center justify-center rounded-2xl bg-black p-4 text-white disabled:cursor-not-allowed disabled:bg-slate-500 lg:col-start-2 lg:row-start-2"
           type="submit"
+          data-umami-event="Search button"
+          data-umami-event-query={searchForm.internal.fields.query?.value}
+          data-umami-event-date={searchForm.internal.fields.date?.value}
+          data-umami-event-range={searchForm.internal.fields.range?.value}
+          data-umami-event-geolocation={`Lat: ${searchForm.internal.fields.latitude?.value} Long: ${searchForm.internal.fields.longitude?.value}`}
+          data-umami-event-tags={
+            searchForm.internal.fields["tags.array"]?.value
+          }
           disabled={!searchForm.dirty}
         >
           Cerca
