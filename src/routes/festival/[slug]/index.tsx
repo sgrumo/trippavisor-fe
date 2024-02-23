@@ -25,7 +25,6 @@ import type {
 export const useGetFestivalDetail = routeLoader$(
   async (event: RequestEventLoader) => {
     const bearer = event.env.get("DATOCMS_API_TOKEN");
-    console.log("bearer", bearer);
 
     const res = await performRequest<IGetSingleFestival>({
       query: GET_SINGLE_FESTIVAL,

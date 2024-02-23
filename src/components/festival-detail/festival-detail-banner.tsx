@@ -19,7 +19,7 @@ export const FestivalDetailBanner = component$<FestivalDetailBannerProps>(
           <a
             class="underline"
             target="blank"
-            href={`http://maps.google.com/maps?q=${festival.address.coordinates.latitude},${festival.address.coordinates.longitude}`}
+            href={`http://maps.google.com/maps?q=${festival.address.coordinates.lat},${festival.address.coordinates.lng}`}
           >
             {formatAddress(festival.address)}
           </a>

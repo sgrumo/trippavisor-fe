@@ -19,22 +19,20 @@ export const MapCard = component$<MapCardProps>(({ festival }) => {
         style="border:0"
         loading="lazy"
         allowFullscreen={true}
-        onLoad$={() => {
-          console.log("loaded"); // TODO: loader
-        }}
+        onLoad$={() => {}}
         referrerPolicy="no-referrer-when-downgrade"
         src={`https://www.google.com/maps/embed/v1/place?key=${
           import.meta.env.PUBLIC_MAPS_API_KEY
         }&q=${festival.title}&center=${
-          festival.address.coordinates.latitude
-        },${festival.address.coordinates.longitude}`}
+          festival.address.coordinates.lat
+        },${festival.address.coordinates.lng}`}
       />
       <p class="icon-paragraph">
         <ImgMap class="icon" />
         <a
           class="underline"
           target="blank"
-          href={`http://maps.google.com/maps?q=${festival.address.coordinates.latitude},${festival.address.coordinates.longitude}`}
+          href={`http://maps.google.com/maps?q=${festival.address.coordinates.lat},${festival.address.coordinates.lng}`}
         >
           {formatAddress(festival.address)}
         </a>

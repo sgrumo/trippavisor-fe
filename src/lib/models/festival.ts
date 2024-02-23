@@ -3,6 +3,11 @@ export interface Coordinates {
   longitude?: number;
 }
 
+export interface AddressCoordinates {
+  lat: number;
+  lng: number;
+}
+
 export interface Address {
   route: string;
   locality: string;
@@ -13,7 +18,7 @@ export interface Address {
   postal_code: string;
   name: string;
   formatted_address: string;
-  coordinates: Coordinates;
+  coordinates: AddressCoordinates;
 }
 
 export interface IPeriod {
