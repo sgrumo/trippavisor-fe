@@ -26,7 +26,7 @@ export default component$(() => {
         <script
           async
           src="https://eu.umami.is/script.js"
-          data-website-id="7c1a06fc-5a40-4b3d-99df-324a8a8e534f"
+          data-website-id={import.meta.env.PUBLIC_UMAMI_WEBSITE_ID}
         />
         <RouterHead />
       </head>
