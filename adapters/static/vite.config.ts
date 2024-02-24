@@ -9,7 +9,6 @@ export default extendConfig(baseConfig, () => {
       rollupOptions: {
         input: ["@qwik-city-plan"],
       },
-      
     },
     plugins: [
       staticAdapter({

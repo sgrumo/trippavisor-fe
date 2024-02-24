@@ -1,16 +1,9 @@
-import {
-  GET_ALL_FESTIVALS,
-  GET_ALL_FESTIVALS_FILTERED,
-} from "../constants/api/queries";
+import { GET_ALL_FESTIVALS_FILTERED } from "../constants/api/queries";
 import { METERS_PER_KILOMETER } from "../constants/generics";
-import { performRequest, performSearch } from "../datocms";
+import { performSearch } from "../datocms";
 import { FestivalQueryOptions } from "../models/api";
 import { IGetAllFestivals } from "../models/cms";
 import { getFilterString, getParams } from "../utils/query-builder";
-
-export const getAllFestivals = async () => {
-  return performRequest<IGetAllFestivals>({ query: GET_ALL_FESTIVALS });
-};
 
 export const searchFestival = async (
   options: FestivalQueryOptions,

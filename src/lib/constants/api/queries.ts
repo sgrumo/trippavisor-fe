@@ -1,30 +1,3 @@
-export const GET_ALL_FESTIVALS = `query {
-    allFestivals {
-        title
-        slug
-        id
-        address
-        period {
-          startdate
-          enddate
-        }
-        tags {
-          tag
-        }
-        thumbnail {
-          responsiveImage {
-            srcSet
-            src
-            sizes
-            height
-            width
-            title
-            alt
-          }
-        }
-      }
-}`;
-
 export const GET_ALL_FESTIVALS_FILTERED = (
   filterString: string,
   params: string,
