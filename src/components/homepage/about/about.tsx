@@ -3,6 +3,15 @@ import { component$ } from "@builder.io/qwik";
 export default component$(() => {
   return (
     <section class="mb-4 mt-4 grid grid-cols-1 gap-x-4 px-4">
+      <p class="mt-16 px-4 text-sm lg:max-w-[60%]">
+        Cerchi un ristorante stellato? Vuoi mangiare piccoli piatti ma delicati?
+        <br />
+        <strong>Vaffanculo.</strong>
+        <br /> Sei nel posto sbagliato. <br />
+        Rimani qui per esplorare le sagre che fanno tendenza in Italia. Cibo
+        iconico, cultura lit e un sacco di good times ti aspettano. Swipe right
+        sulla tua prossima avventura gastronomica.
+      </p>
       <h3 class="text-lg font-bold">Cos'è Trippavisor</h3>
       <p>
         Trippavisor è il tuo passaporto per l'avventura nelle sagre italiane,

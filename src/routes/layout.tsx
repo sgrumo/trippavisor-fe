@@ -16,7 +16,7 @@ export default component$(() => {
   return (
     <>
       <Navbar />
-      <main class="pt-[4.5rem]">
+      <main class="">
         <Slot />
       </main>
     </>
