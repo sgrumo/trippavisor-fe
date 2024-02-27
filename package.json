@@ -22,11 +22,13 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "preview": "qwik build preview && vite preview --open",
     "start": "vite --open --mode ssr",
-    "qwik": "qwik"
+    "qwik": "qwik",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@builder.io/qwik": "^1.2.19",
     "@builder.io/qwik-city": "^1.2.19",
+    "@types/animejs": "^3.1.12",
     "@types/eslint": "^8.44.4",
     "@types/node": "^20.8.4",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
@@ -34,6 +36,7 @@
     "autoprefixer": "^10.4.14",
     "eslint": "^8.51.0",
     "eslint-plugin-qwik": "^1.2.19",
+    "husky": "^8.0.0",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
@@ -46,6 +49,7 @@
   },
   "dependencies": {
     "@modular-forms/qwik": "^0.23.1",
+    "animejs": "^3.2.2",
     "classnames": "^2.5.1",
     "framer-motion": "^11.0.6",
     "valibot": "^0.28.1"
