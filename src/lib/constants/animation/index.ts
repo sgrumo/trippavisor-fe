@@ -43,7 +43,7 @@ const bellaSignoraAnimation: anime.AnimeAnimParams = {
   easing: "spring(1, 80, 10, 0)",
   translateY: ["+100%", "0"],
   duration: BASE_DURATION / 2,
-  delay: TITLE_DELAY,
+  delay: TITLE_DELAY + BASE_DURATION,
 };
 
 const altraBellaSignoraAnimation: anime.AnimeAnimParams = {
@@ -51,7 +51,7 @@ const altraBellaSignoraAnimation: anime.AnimeAnimParams = {
   easing: "spring(1, 80, 10, 0)",
   translateX: ["+150%", "0"],
   duration: BASE_DURATION / 2,
-  delay: TITLE_DELAY,
+  delay: TITLE_DELAY + BASE_DURATION,
 };
 
 const vaffanculoAnimation: anime.AnimeAnimParams = {

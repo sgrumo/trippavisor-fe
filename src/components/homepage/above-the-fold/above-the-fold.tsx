@@ -15,7 +15,7 @@ export default component$(() => {
       <picture class="bella-signora absolute bottom-0 left-0 w-[50%] lg:w-[25%]">
         <BellaSignoraImg />
       </picture>
-      <picture class="altra-bella-signora absolute right-[3%] top-[3%] w-[50%] lg:w-[25%]">
+      <picture class="altra-bella-signora absolute right-[3%] top-[5%] w-[50%] lg:top-[1%] lg:w-[22%]">
         <AltraBellaSignoraImg />
       </picture>
     </header>
