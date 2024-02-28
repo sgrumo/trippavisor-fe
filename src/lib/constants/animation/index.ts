@@ -38,12 +38,29 @@ const headerAnimation: anime.AnimeAnimParams = {
   delay: TITLE_DELAY,
 };
 
-const headerImagesAnimation: anime.AnimeAnimParams = {
-  targets: "header picture",
-  easing: "easeInOutSine",
-  opacity: [0, 1],
-  duration: BASE_DURATION * 2,
+const bellaSignoraAnimation: anime.AnimeAnimParams = {
+  targets: "header picture.bella-signora",
+  easing: "spring(1, 80, 10, 0)",
+  translateY: ["+100%", "0"],
+  duration: BASE_DURATION / 2,
   delay: TITLE_DELAY,
+};
+
+const altraBellaSignoraAnimation: anime.AnimeAnimParams = {
+  targets: "header picture.altra-bella-signora",
+  easing: "spring(1, 80, 10, 0)",
+  translateX: ["+150%", "0"],
+  duration: BASE_DURATION / 2,
+  delay: TITLE_DELAY,
+};
+
+const vaffanculoAnimation: anime.AnimeAnimParams = {
+  targets: ".ml15 p",
+  scale: [14, 1],
+  opacity: [0, 1],
+  easing: "easeOutCirc",
+  duration: 800,
+  delay: (el, i) => TITLE_DELAY + 800 * i,
 };
 
 export const initAnimations = () => {
@@ -51,5 +68,7 @@ export const initAnimations = () => {
   anime(titleFillAnimation);
   anime(subtitleAnimation);
   anime(headerAnimation);
-  anime(headerImagesAnimation);
+  anime(bellaSignoraAnimation);
+  anime(altraBellaSignoraAnimation);
+  anime(vaffanculoAnimation);
 };

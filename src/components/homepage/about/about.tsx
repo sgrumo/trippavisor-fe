@@ -1,12 +1,16 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useVisibleTask$ } from "@builder.io/qwik";
 
 export default component$(() => {
+  useVisibleTask$(() => {});
+
   return (
     <section class="mb-4 mt-4 flex flex-col gap-y-2 px-4">
       <p>
         Cerchi un ristorante stellato? Vuoi mangiare piccoli piatti ma delicati?
       </p>
-      <p class="font-bold">Vaffanculo.</p>
+      <h1 class="ml15">
+        <p class="font-bold">Vaffanculo.</p>
+      </h1>
       <p>Sei nel posto sbagliato.</p>
       <p>
         Rimani qui per esplorare le sagre che fanno tendenza in Italia. Cibo
