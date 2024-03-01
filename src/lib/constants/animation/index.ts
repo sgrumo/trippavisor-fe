@@ -55,12 +55,10 @@ const altraBellaSignoraAnimation: anime.AnimeAnimParams = {
 };
 
 export const initAnimations = () => {
-  // anime(titleAnimation);
-  // anime(titleFillAnimation);
-  // anime(subtitleAnimation);
-  // anime(headerAnimation);
-  // anime(bellaSignoraAnimation);
-  // anime(altraBellaSignoraAnimation);
-  // anime(vaffanculoAnimation);
-  // anime(vaffanculoContainer);
+  anime(titleAnimation);
+  anime(titleFillAnimation);
+  anime(subtitleAnimation);
+  anime(headerAnimation);
+  anime(bellaSignoraAnimation);
+  anime(altraBellaSignoraAnimation);
 };
