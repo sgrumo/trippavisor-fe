@@ -5,7 +5,7 @@ import Title from "~/components/title/title";
 
 export default component$(() => {
   return (
-    <header class="relative flex min-h-screen flex-col items-center justify-center bg-transparent">
+    <header class="relative flex h-full min-h-screen flex-col items-center justify-center overflow-hidden bg-transparent">
       <div class="circle absolute z-[-1] h-full w-full bg-yellow"></div>
       <h1 class="invisible">Trippavisor</h1>
       <Title />

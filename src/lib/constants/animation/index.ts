@@ -54,21 +54,13 @@ const altraBellaSignoraAnimation: anime.AnimeAnimParams = {
   delay: TITLE_DELAY + BASE_DURATION,
 };
 
-const vaffanculoAnimation: anime.AnimeAnimParams = {
-  targets: ".ml15 p",
-  scale: [14, 1],
-  opacity: [0, 1],
-  easing: "easeOutCirc",
-  duration: 800,
-  delay: (el, i) => TITLE_DELAY + 800 * i,
-};
-
 export const initAnimations = () => {
-  anime(titleAnimation);
-  anime(titleFillAnimation);
-  anime(subtitleAnimation);
-  anime(headerAnimation);
-  anime(bellaSignoraAnimation);
-  anime(altraBellaSignoraAnimation);
-  anime(vaffanculoAnimation);
+  // anime(titleAnimation);
+  // anime(titleFillAnimation);
+  // anime(subtitleAnimation);
+  // anime(headerAnimation);
+  // anime(bellaSignoraAnimation);
+  // anime(altraBellaSignoraAnimation);
+  // anime(vaffanculoAnimation);
+  // anime(vaffanculoContainer);
 };

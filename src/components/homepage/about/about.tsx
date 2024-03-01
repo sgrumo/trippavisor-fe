@@ -1,26 +1,39 @@
 import { component$, useVisibleTask$ } from "@builder.io/qwik";
+import anime from "animejs";
 
 export default component$(() => {
-  useVisibleTask$(() => {});
+  useVisibleTask$(() => {
+    const popupTextAnimation: anime.AnimeAnimParams = {
+      targets: ".out-now span",
+      scale: [14, 1],
+      opacity: [0, 1],
+      easing: "linear",
+      duration: 800,
+      delay: (el, i) => 1500 + 800 * i,
+    };
+    anime(popupTextAnimation);
+  });
 
   return (
-    <section class="mb-4 mt-4 flex flex-col gap-y-2 px-4">
+    <section id="about" class="mb-4 mt-4 flex flex-col gap-y-2 px-4">
+      <div class="flex flex-col gap-y-4 lg:flex-row lg:items-center lg:gap-x-8">
+        <ul>
+          <li>Cerchi un ristorante stellato?</li>
+          <li>Vuoi mangiare piccoli piatti ma delicati?</li>
+        </ul>
+        <div class="out-now flex gap-x-1">
+          <span class="inline-block text-xl font-bold uppercase">HAI</span>
+          <span class="inline-block text-xl font-bold uppercase">
+            SBAGLIATO
+          </span>
+          <span class="inline-block text-xl font-bold uppercase">SITO.</span>
+        </div>
+      </div>
+      <p>Rimani qui per esplorare le sagre che fanno tendenza in Italia.</p>
       <p>
-        Cerchi un ristorante stellato? Vuoi mangiare piccoli piatti ma delicati?
-      </p>
-      <h1 class="ml15">
-        <p class="font-bold">Vaffanculo.</p>
-      </h1>
-      <p>Sei nel posto sbagliato.</p>
-      <p>
-        Rimani qui per esplorare le sagre che fanno tendenza in Italia. Cibo
-        iconico, cultura lit e un sacco di good times ti aspettano. Swipe right
-        sulla tua prossima avventura gastronomica.
-      </p>
-      <p>
-        Trippavisor è il tuo passaporto per l'avventura nelle sagre italiane,
-        dove ogni evento è un'opportunità per scoprire
-        <i class="ml-1">storie nascoste e sapori indimenticabili.</i>
+        <strong>Trippavisor</strong> è il tuo passaporto per l'avventura nelle
+        sagre italiane, dove ogni evento è un'opportunità per scoprire storie
+        nascoste e sapori indimenticabili.
       </p>
       <p class="mt-2">
         Lasciati ispirare da paesaggi mozzafiato e dalla passione delle comunità
