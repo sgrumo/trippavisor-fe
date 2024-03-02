@@ -1,11 +1,15 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useVisibleTask$ } from "@builder.io/qwik";
 import AltraBellaSignoraImg from "~/assets/images/homepage/altrabellasignora.png?jsx";
 import BellaSignoraImg from "~/assets/images/homepage/bellasignora.png?jsx";
 import Title from "~/components/title/title";
 
 export default component$(() => {
+  useVisibleTask$(() => {
+    // initHomepageAnimations();
+  });
+
   return (
-    <header class="relative flex h-full min-h-screen flex-col items-center justify-center overflow-hidden bg-transparent">
+    <header class="relative flex min-h-screen flex-col items-center justify-center bg-transparent">
       <div class="circle absolute z-[-1] h-full w-full bg-yellow"></div>
       <h1 class="invisible">Trippavisor</h1>
       <Title />
@@ -18,6 +22,13 @@ export default component$(() => {
       <picture class="altra-bella-signora absolute right-[3%] top-[5%] w-[50%] lg:top-[1%] lg:w-[22%]">
         <AltraBellaSignoraImg />
       </picture>
+      <a
+        href="#about"
+        title="about"
+        class="about-anchor absolute bottom-[3%] right-[3%] flex h-8 w-8 items-center justify-center rounded-[50%] bg-white"
+      >
+        &#8595;
+      </a>
     </header>
   );
 });

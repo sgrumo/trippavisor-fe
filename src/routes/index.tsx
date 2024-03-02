@@ -19,7 +19,13 @@ export const head: DocumentHead = {
   meta: [
     {
       name: "description",
-      content: "Il portale definitivo per le sagre",
+      content:
+        "Scopri le migliori sagre d'Italia su Trippavisor! Trova eventi gastronomici, festival e feste in base alle tue preferenze.",
+    },
+    {
+      name: "keywords",
+      content:
+        "sagre, sagre italiane, eventi gastronomici, ricerca sagre, cibo di strada, festival",
     },
     {
       property: "og:title",
@@ -27,7 +33,8 @@ export const head: DocumentHead = {
     },
     {
       property: "og:description",
-      content: "Il portale definitivo per le sagre",
+      content:
+        "Scopri le migliori sagre d'Italia su Trippavisor! Trova eventi gastronomici, festival e feste in base alle tue preferenze.",
     },
     {
       property: "twitter:title",
@@ -35,7 +42,8 @@ export const head: DocumentHead = {
     },
     {
       property: "twitter:description",
-      content: "Il portale definitivo per le sagre",
+      content:
+        "Scopri le migliori sagre d'Italia su Trippavisor! Trova eventi gastronomici, festival e feste in base alle tue preferenze.",
     },
   ],
 };

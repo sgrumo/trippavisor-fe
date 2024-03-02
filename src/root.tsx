@@ -1,4 +1,4 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import {
   QwikCityProvider,
   RouterOutlet,
@@ -10,6 +10,17 @@ import { RouterHead } from "./components/router-head/router-head";
 import "./global.css";
 
 export default component$(() => {
+  const endTimer = useSignal(false);
+
+  useVisibleTask$(({ cleanup }) => {
+    const scrollTimeout = setTimeout(() => {
+      endTimer.value = true;
+    }, 1500);
+    cleanup(() => {
+      clearTimeout(scrollTimeout);
+    });
+  });
+
   return (
     <QwikCityProvider>
       <head>
@@ -30,7 +41,7 @@ export default component$(() => {
         />
         <RouterHead />
       </head>
-      <body lang="en">
+      <body lang="en" class={endTimer.value ? "" : "h-full overflow-hidden"}>
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>

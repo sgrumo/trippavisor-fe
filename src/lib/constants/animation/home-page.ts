@@ -1,23 +1,22 @@
 import anime from "animejs";
 
 const TITLE_DELAY = "TRIPPAVISOR".length * 250;
-const BASE_DURATION = 800;
+const BASE_DURATION = 600;
+const TEXT_ANIMATION_DURATION = 500;
 
 const titleAnimation: anime.AnimeAnimParams = {
   targets: ".loader path",
   strokeDashoffset: [anime.setDashoffset, 0],
   easing: "easeInOutSine",
   duration: BASE_DURATION,
-  delay: function (el, i) {
-    return i * 250;
-  },
+  delay: (el, i) => i * 250,
 };
 
 const titleFillAnimation: anime.AnimeAnimParams = {
   targets: ".loader path",
   fill: ["#000"],
   easing: "linear",
-  duration: 500,
+  duration: TEXT_ANIMATION_DURATION,
   delay: TITLE_DELAY,
 };
 
@@ -25,7 +24,7 @@ const subtitleAnimation: anime.AnimeAnimParams = {
   targets: "header h2",
   opacity: [0, 1],
   easing: "linear",
-  duration: 500,
+  duration: TEXT_ANIMATION_DURATION,
   delay: TITLE_DELAY,
 };
 
@@ -54,11 +53,20 @@ const altraBellaSignoraAnimation: anime.AnimeAnimParams = {
   delay: TITLE_DELAY + BASE_DURATION,
 };
 
-export const initAnimations = () => {
+const aboutAnchorAnimation: anime.AnimeAnimParams = {
+  targets: "header .about-anchor",
+  easing: "spring(1, 120, 10, 0)",
+  translateY: ["+200%", "0"],
+  duration: BASE_DURATION / 2,
+  delay: TITLE_DELAY + BASE_DURATION / 2 + BASE_DURATION,
+};
+
+export const initHomepageAnimations = () => {
   anime(titleAnimation);
   anime(titleFillAnimation);
   anime(subtitleAnimation);
   anime(headerAnimation);
   anime(bellaSignoraAnimation);
   anime(altraBellaSignoraAnimation);
+  anime(aboutAnchorAnimation);
 };

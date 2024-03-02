@@ -1,7 +1,6 @@
-import { component$, Slot, useVisibleTask$ } from "@builder.io/qwik";
+import { component$, Slot } from "@builder.io/qwik";
 import type { RequestHandler } from "@builder.io/qwik-city";
 import { Navbar } from "~/components/navbar/navbar";
-import { initAnimations } from "~/lib/constants/animation";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -15,10 +14,6 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 };
 
 export default component$(() => {
-  useVisibleTask$(() => {
-    initAnimations();
-  });
-
   return (
     <>
       <Navbar />
