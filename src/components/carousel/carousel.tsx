@@ -42,10 +42,10 @@ export const Carousel = component$<CarouselProps>(({ gallery }) => {
           ></img>
         ))}
       </div>
-      <button class="prev" onClick$={prevSlide}>
+      <button class="prev left-[10%]" onClick$={prevSlide}>
         &#10094;
       </button>
-      <button class="next" onClick$={nextSlide}>
+      <button class="next right-[10%]" onClick$={nextSlide}>
         &#10095;
       </button>
     </div>

@@ -2,10 +2,11 @@ import { component$, useVisibleTask$ } from "@builder.io/qwik";
 import AltraBellaSignoraImg from "~/assets/images/homepage/altrabellasignora.png?jsx";
 import BellaSignoraImg from "~/assets/images/homepage/bellasignora.png?jsx";
 import Title from "~/components/title/title";
+import { initHomepageAnimations } from "~/lib/constants/animation/home-page";
 
 export default component$(() => {
   useVisibleTask$(() => {
-    // initHomepageAnimations();
+    initHomepageAnimations();
   });
 
   return (
