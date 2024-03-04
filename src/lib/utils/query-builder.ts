@@ -11,7 +11,7 @@ import { FestivalQueryOptions } from "../models/api";
 
 export const getParams = ({
   date,
-  radius,
+  range,
   latitude,
   longitude,
   query,
@@ -23,7 +23,9 @@ export const getParams = ({
     params.push(`$date: Date`);
   }
 
-  if (latitude && longitude && radius) {
+  console.log(latitude, longitude, range);
+
+  if (latitude && longitude && range) {
     params.push(
       `$latitude: FloatType!, $longitude: FloatType!, $radius: FloatType!`,
     );
@@ -46,7 +48,7 @@ export const getParams = ({
 
 export const getFilterString = ({
   date,
-  radius,
+  range,
   latitude,
   longitude,
   query,
@@ -65,7 +67,7 @@ export const getFilterString = ({
         `);
   }
 
-  if (latitude && longitude && radius) {
+  if (latitude && longitude && range) {
     filters.push(`{ ${LOCALIZATION_FILTER} },`);
   }
 

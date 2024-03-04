@@ -39,10 +39,10 @@ export const searchFestival = async (
     });
   }
 
-  if (options.radius && options.latitude && options.longitude) {
+  if (options.range && options.latitude && options.longitude) {
     variables.latitude = options.latitude;
     variables.longitude = options.longitude;
-    variables.radius = options.radius * METERS_PER_KILOMETER;
+    variables.radius = options.range * METERS_PER_KILOMETER;
   }
 
   return performSearch<IGetAllFestivals>({

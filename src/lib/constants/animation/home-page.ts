@@ -1,15 +1,16 @@
 import anime from "animejs";
 
-const TITLE_DELAY = "TRIPPAVISOR".length * 250;
-const BASE_DURATION = 600;
-const TEXT_ANIMATION_DURATION = 500;
+const TITLE_LETTER_WRITE_ANIMATION = 200;
+const TITLE_DELAY = "TRIPPAVISOR".length * TITLE_LETTER_WRITE_ANIMATION;
+const BASE_DURATION = 400;
+const TEXT_ANIMATION_DURATION = 300;
 
 const titleAnimation: anime.AnimeAnimParams = {
   targets: ".loader path",
   strokeDashoffset: [anime.setDashoffset, 0],
   easing: "easeInOutSine",
   duration: BASE_DURATION,
-  delay: (el, i) => i * 250,
+  delay: (el, i) => i * TITLE_LETTER_WRITE_ANIMATION,
 };
 
 const titleFillAnimation: anime.AnimeAnimParams = {

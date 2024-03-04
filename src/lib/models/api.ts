@@ -16,7 +16,7 @@ export interface FestivalQueryOptions {
   date?: string;
   latitude?: number;
   longitude?: number;
-  radius?: number;
+  range?: number;
   query?: string;
   tags?: string[];
 }

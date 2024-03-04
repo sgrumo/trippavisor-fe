@@ -50,8 +50,11 @@ export default component$(() => {
     const options: FestivalQueryOptions = {
       ...values,
       tags,
+      latitude: store.coordinates.latitude,
+      longitude: store.coordinates.longitude,
       date: values.date ? values.date.toLocaleDateString() : undefined,
     };
+
     const res = await searchFestival(options);
     store.festivals = res.allFestivals;
     store.loading = false;
@@ -76,24 +79,7 @@ export default component$(() => {
             searchForm.dirty = true;
           }}
         />
-        <Field name="latitude" type="number">
-          {(_, props) => (
-            <input
-              {...props}
-              type="hidden"
-              value={store.coordinates.latitude}
-            />
-          )}
-        </Field>
-        <Field name="longitude" type="number">
-          {(_, props) => (
-            <input
-              {...props}
-              type="hidden"
-              value={store.coordinates.longitude}
-            />
-          )}
-        </Field>
+
         <label
           class={`${store.coordinates.latitude && store.coordinates.longitude ? "visible" : "hidden lg:invisible lg:block"}`}
         >
