@@ -18,10 +18,10 @@ export default component$(() => {
         Il portale <i>definitivo</i> per le sagre
       </h2>
       <picture class="bella-signora absolute bottom-0 left-0 w-[50%] lg:w-[25%]">
-        <BellaSignoraImg />
+        <BellaSignoraImg loading="eager" />
       </picture>
       <picture class="altra-bella-signora absolute right-[3%] top-[5%] w-[50%] lg:top-[1%] lg:w-[22%]">
-        <AltraBellaSignoraImg />
+        <AltraBellaSignoraImg loading="eager" />
       </picture>
       <a
         href="#about"
