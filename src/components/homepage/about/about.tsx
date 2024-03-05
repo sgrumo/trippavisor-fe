@@ -25,14 +25,6 @@ export default component$(() => {
           </span>
         </div>
       </div>
-      <a
-        href="#description"
-        title="description"
-        class="absolute right-[3%] top-[50%] flex h-8 w-8 items-center justify-center rounded-[50%] "
-      >
-        &#8595;
-      </a>
-
       <Description />
     </section>
   );

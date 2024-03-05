@@ -42,6 +42,7 @@ const bellaSignoraAnimation: anime.AnimeAnimParams = {
   targets: "header picture.bella-signora",
   easing: "spring(1, 80, 10, 0)",
   translateY: ["+100%", "0"],
+  opacity: [0, 1],
   duration: BASE_DURATION / 2,
   delay: TITLE_DELAY + BASE_DURATION,
 };
@@ -50,6 +51,7 @@ const altraBellaSignoraAnimation: anime.AnimeAnimParams = {
   targets: "header picture.altra-bella-signora",
   easing: "spring(1, 80, 10, 0)",
   translateX: ["+150%", "0"],
+  opacity: [0, 1],
   duration: BASE_DURATION / 2,
   delay: TITLE_DELAY + BASE_DURATION,
 };
@@ -57,6 +59,7 @@ const altraBellaSignoraAnimation: anime.AnimeAnimParams = {
 const aboutAnchorAnimation: anime.AnimeAnimParams = {
   targets: "header .about-anchor",
   easing: "spring(1, 120, 10, 0)",
+  opacity: [0, 1],
   translateY: ["+200%", "0"],
   duration: BASE_DURATION / 2,
   delay: TITLE_DELAY + BASE_DURATION / 2 + BASE_DURATION,

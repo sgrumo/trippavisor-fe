@@ -9,7 +9,7 @@ export default component$(() => {
   });
 
   return (
-    <section id="description">
+    <section id="description" class="pt-8">
       <div class="about-content relative flex flex-col gap-y-2">
         <p class="mb-6 w-[95%] font-['Staatliches'] text-5xl font-semibold text-green md:max-w-[70%]">
           Rimani qui per esplorare le sagre che fanno tendenza in Italia
@@ -50,7 +50,7 @@ export default component$(() => {
           >
             Vai alla ricerca!
           </a>
-          <picture class="bel-signore absolute bottom-0 right-[3%] z-[-1] w-[30%] md:w-[40%] lg:w-[30%]">
+          <picture class="bel-signore absolute bottom-0 right-[3%] z-[-1] w-[30%] opacity-0 md:w-[40%] lg:w-[30%]">
             <BelSignoreImg />
           </picture>
         </div>

@@ -1,6 +1,6 @@
 import anime from "animejs";
 
-const POPUP_TEXT_ANIMATION_DELAY = 1000;
+const POPUP_TEXT_ANIMATION_DELAY = 300;
 const POPUP_TEXT_ANIMATION_DURATION = 350;
 
 const aboutContentAnimation: anime.AnimeAnimParams = {
@@ -14,6 +14,7 @@ const aboutContentAnimation: anime.AnimeAnimParams = {
 const belSignoreAnimation: anime.AnimeAnimParams = {
   targets: ".bel-signore",
   easing: "linear",
+  opacity: [0, 1],
   translateY: ["+100%", "0"],
   duration: 2500,
   delay: POPUP_TEXT_ANIMATION_DELAY + POPUP_TEXT_ANIMATION_DURATION * 3,
