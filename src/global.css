@@ -13,7 +13,7 @@ html {
   tab-size: 4;
   font-family: "Be Vietnam Pro", sans-serif;
   scroll-behavior: smooth;
-  scroll-padding: 0px;
+  scroll-padding: 0;
 }
 
 body {

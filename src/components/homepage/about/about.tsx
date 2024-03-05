@@ -1,72 +1,39 @@
 import { component$, useVisibleTask$ } from "@builder.io/qwik";
-import BelSignoreImg from "~/assets/images/homepage/belsignore.png?jsx";
-import TortellinoImg from "~/assets/images/homepage/tortellino.svg?jsx";
+import { initAboutAnimations } from "~/lib/constants/animation/about";
+import Description from "./description";
 
 export default component$(() => {
   useVisibleTask$(() => {
-    // initAboutAnimations();
+    initAboutAnimations();
   });
 
   return (
-    <section id="about" class="relative my-8 px-4">
-      <div class="mb-16 grid grid-cols-1 gap-y-4 md:gap-x-24">
-        <ul class="text-xl md:text-3xl">
-          <li class="font-bold">Cerchi un ristorante stellato?</li>
-          <li class="mt-4 text-left font-bold md:mt-8">
+    <section
+      id="about"
+      class="relative px-4 py-16 md:px-10 md:pt-24 lg:mt-32 lg:px-24 xl:px-48"
+    >
+      <div class="grid h-screen grid-cols-1 py-24">
+        <ul class="text-3xl">
+          <li>Cerchi un ristorante stellato?</li>
+          <li class="mt-20 md:mt-8 md:text-right">
             Vuoi mangiare piccoli piatti, ma delicati?
           </li>
         </ul>
-        <div class="out-now flex justify-center gap-x-1 text-center text-2xl text-red">
-          <span class="inline-block font-bold uppercase">hai</span>
-          <span class="inline-block font-bold uppercase">sbagliato</span>
-          <span class="inline-block font-bold uppercase">sito</span>
+        <div class="out-now flex justify-center gap-x-2 text-center font-['Staatliches'] text-6xl text-red md:text-5xl">
+          <span class="inline-block font-bold uppercase">
+            hai sbagliato sito
+          </span>
         </div>
       </div>
-      <div class="about-content relative flex flex-col gap-y-2">
-        <p class="mb-6 w-[95%] text-3xl font-semibold">
-          Rimani qui per esplorare le sagre che fanno tendenza in Italia
-        </p>
-        <picture class="absolute -top-[7%] right-[-4%] z-[-1] h-24 w-24 -rotate-[35deg]">
-          <TortellinoImg class="h-full w-full" />
-        </picture>
-      </div>
-      <div class="about-content flex flex-col gap-y-2">
-        <h3 class="mb-0 mt-4 text-lg font-semibold leading-4">
-          Cos'è Trippavisor
-        </h3>
-        <p>
-          <i>Trippavisor</i> è il tuo passaporto per l'avventura nelle sagre
-          italiane, dove ogni evento è un'opportunità per scoprire storie
-          nascoste e sapori indimenticabili.
-        </p>
-        <h3 class="mb-0 mt-4 text-lg font-semibold leading-4">
-          Perché Trippavisor
-        </h3>
-        <p>
-          Lasciati ispirare da paesaggi mozzafiato e dalla passione delle
-          comunità locali: <i>Trippavisor</i> è più di una guida, è un invito a
-          vivere l'Italia con il cuore.
-        </p>
-        <h3 class="mb-0 mt-4 text-lg font-semibold leading-4">
-          Non sai dove cominciare?
-        </h3>
-        <p>
-          Con <i>Trippavisor</i> puoi trovare la sagra perfetta
-        </p>
-        <div class="flex gap-x-4">
-          <a
-            class="mt-4 rounded-2xl bg-red p-4 text-center font-bold uppercase text-white"
-            title="ricerca"
-            data-umami-event="About search button click"
-            href="/search"
-          >
-            Vai alla ricerca!
-          </a>
-          <picture class="bel-signore absolute bottom-[-4%] right-[3%] z-[-1] w-[30%]">
-            <BelSignoreImg />
-          </picture>
-        </div>
-      </div>
+      <a
+        href="#description"
+        title="description"
+        class="absolute right-[3%] top-[50%] flex h-8 w-8 items-center justify-center rounded-[50%] "
+      >
+        &#8595;
+      </a>
+
+      <Description />
     </section>
   );
 });

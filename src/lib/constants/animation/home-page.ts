@@ -1,6 +1,6 @@
 import anime from "animejs";
 
-const TITLE_LETTER_WRITE_ANIMATION = 250;
+const TITLE_LETTER_WRITE_ANIMATION = 150;
 const TITLE_DELAY = "TRIPPAVISOR".length * TITLE_LETTER_WRITE_ANIMATION;
 const BASE_DURATION = 500;
 const TEXT_ANIMATION_DURATION = 300;
@@ -10,7 +10,7 @@ const titleAnimation: anime.AnimeAnimParams = {
   strokeDashoffset: [anime.setDashoffset, 0],
   easing: "easeInOutSine",
   duration: BASE_DURATION,
-  delay: (el, i) => i * TITLE_LETTER_WRITE_ANIMATION,
+  delay: (_, i) => i * TITLE_LETTER_WRITE_ANIMATION,
 };
 
 const titleFillAnimation: anime.AnimeAnimParams = {
