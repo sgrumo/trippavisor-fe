@@ -5,13 +5,13 @@ import type {
   StaticGenerateHandler,
 } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
-import { Carousel } from "~/components/carousel/carousel";
+import { Carousel } from "~/components/festival-detail/carousel/carousel";
 import { ContactCard } from "~/components/festival-detail/contact.card";
 import { DetailCard } from "~/components/festival-detail/detail-card";
 import { FestivalDetailBanner } from "~/components/festival-detail/festival-detail-banner";
 import { MapCard } from "~/components/festival-detail/map-card";
 import { MenuCard } from "~/components/festival-detail/menu-card";
-import { PdfViewer } from "~/components/pdf-viewer/pdf-viewer";
+import { PdfViewer } from "~/components/festival-detail/pdf-viewer/pdf-viewer";
 import {
   GET_ALL_FESTIVAL_SLUGS,
   GET_SINGLE_FESTIVAL,

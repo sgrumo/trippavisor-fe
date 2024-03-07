@@ -4,8 +4,8 @@ import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import type { InitialValues, SubmitHandler } from "@modular-forms/qwik";
 
 import { reset, useForm } from "@modular-forms/qwik";
-import { SearchInput } from "~/components/input/search-input/search-input";
-import { SearchCard } from "~/components/search-card/search-card";
+import { SearchCard } from "~/components/search/search-card/search-card";
+import { SearchInput } from "~/components/search/search-input/search-input";
 import { searchFestival } from "~/lib/api/queries";
 import { TAGS_OPTIONS } from "~/lib/constants/api/cms";
 import { DEFAULT_RADIUS } from "~/lib/constants/generics";
